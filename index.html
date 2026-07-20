@@ -1,0 +1,874 @@
+<!DOCTYPE html>
+<html lang="es" id="htmlRoot">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>La Marea &mdash; Menú digital, Gijón</title>
+<meta name="description" content="Menú digital de La Marea, cocina asturiana en Gijón.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600;9..144,700&family=Work+Sans:wght@400;500;600&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --navy:#0b2b3c;
+    --navy-deep:#081f2c;
+    --navy-panel:#123249;
+    --foam:#8fd1c2;
+    --foam-dim:#5fa596;
+    --gold:#c69436;
+    --gold-bright:#e0ac48;
+    --paper:#f3ecdc;
+    --paper-dim:#e7dcc4;
+    --ink:#1c2b2e;
+    --ink-soft:#4a5a5c;
+    --coral:#c1553a;
+    --radius:4px;
+    --radius-md:14px;
+    --radius-lg:20px;
+    --max-w:1180px;
+  }
+
+  *{ box-sizing:border-box; }
+  html{ scroll-behavior:smooth; }
+  body{
+    margin:0;
+    background:var(--paper);
+    color:var(--ink);
+    font-family:'Work Sans', sans-serif;
+    font-size:16px;
+    line-height:1.5;
+  }
+  img{ max-width:100%; display:block; }
+  a{ color:inherit; }
+
+  :focus-visible{
+    outline:2px solid var(--gold-bright);
+    outline-offset:3px;
+  }
+
+  h1,h2,h3{
+    font-family:'Fraunces', serif;
+    margin:0;
+    font-weight:600;
+  }
+
+  .wrap{
+    max-width:var(--max-w);
+    margin:0 auto;
+    padding:0 20px;
+  }
+
+  /* ---------- HERO ---------- */
+  .hero{
+    background:
+      radial-gradient(ellipse at 80% 0%, rgba(143,209,194,0.10), transparent 55%),
+      linear-gradient(180deg, var(--navy-deep), var(--navy) 70%);
+    color:var(--paper);
+    padding:60px 0 0;
+    overflow:hidden;
+    position:relative;
+  }
+  .top-actions{
+    position:absolute;
+    top:20px; right:20px;
+    z-index:2;
+    display:flex;
+    align-items:center;
+    gap:8px;
+  }
+  .lang-toggle, .fav-shortcut{
+    font-family:'Space Mono', monospace;
+    font-size:12px;
+    letter-spacing:.04em;
+    padding:8px 14px;
+    min-height:40px;
+    border-radius:100px;
+    border:1.5px solid var(--foam-dim);
+    background:rgba(8,31,44,0.35);
+    color:var(--paper);
+    cursor:pointer;
+    transition:background .15s, transform .12s;
+  }
+  .lang-toggle:hover, .fav-shortcut:hover{ background:rgba(8,31,44,0.6); }
+  .lang-toggle:active, .fav-shortcut:active{ transform:scale(0.96); }
+  .fav-shortcut{
+    display:flex;
+    align-items:center;
+    gap:6px;
+    padding:8px 12px 8px 10px;
+  }
+  .fav-shortcut svg{ width:16px; height:16px; flex-shrink:0; }
+  .fav-shortcut path{ fill:none; stroke:var(--paper); stroke-width:1.8; transition:fill .15s, stroke .15s; }
+  .fav-shortcut.has-favs{ border-color:var(--coral); }
+  .fav-shortcut.has-favs path{ fill:var(--coral); stroke:var(--coral); }
+  .fav-count{ min-width:14px; text-align:left; }
+  .hero-inner{
+    display:flex;
+    flex-wrap:wrap;
+    align-items:center;
+    gap:32px;
+    padding-bottom:30px;
+    padding-top:24px;
+  }
+  .hero-text{ flex:1 1 340px; min-width:260px; }
+  .eyebrow{
+    font-family:'Space Mono', monospace;
+    letter-spacing:.14em;
+    text-transform:uppercase;
+    font-size:12px;
+    color:var(--foam);
+    display:flex;
+    align-items:center;
+    gap:10px;
+    margin-bottom:16px;
+  }
+  .eyebrow::before{
+    content:"";
+    width:22px; height:1px;
+    background:var(--foam-dim);
+    display:inline-block;
+  }
+  .hero h1{
+    font-size:clamp(2.4rem, 8vw, 4.4rem);
+    line-height:0.98;
+    letter-spacing:-0.01em;
+  }
+  .hero h1 em{
+    font-style:italic;
+    color:var(--gold-bright);
+    font-weight:500;
+  }
+  .hero p.tag{
+    margin-top:18px;
+    max-width:46ch;
+    color:#cfe3de;
+    font-size:1.02rem;
+  }
+  .hero-meta{
+    margin-top:26px;
+    display:flex;
+    gap:24px;
+    flex-wrap:wrap;
+    font-family:'Space Mono', monospace;
+    font-size:12.5px;
+    color:var(--foam);
+  }
+  .hero-meta span{ display:block; color:#8fa9a3; font-size:11px; letter-spacing:.06em; margin-bottom:3px; }
+
+  .sea-wrap{
+    flex:1 1 240px;
+    min-width:220px;
+    max-width:320px;
+    margin:0 auto;
+    display:flex;
+    justify-content:center;
+  }
+  .sea-svg{ width:100%; height:auto; }
+
+  .wave-group{ animation:drift 14s linear infinite; }
+  .wave-group.back{ animation-duration:20s; animation-direction:reverse; opacity:0.55; }
+  @keyframes drift{ from{ transform:translateX(0); } to{ transform:translateX(-150px); } }
+
+  .boat{ transform-origin:150px 108px; animation:bob 3.2s ease-in-out infinite; }
+  @keyframes bob{
+    0%,100%{ transform:translateY(0) rotate(-2deg); }
+    50%{ transform:translateY(-5px) rotate(2deg); }
+  }
+
+  .gull{ animation:fly 5s ease-in-out infinite; }
+  .gull.g2{ animation-duration:6.5s; animation-delay:.6s; }
+  @keyframes fly{
+    0%,100%{ transform:translate(0,0); }
+    50%{ transform:translate(-8px,-6px); }
+  }
+
+  @media (prefers-reduced-motion: reduce){
+    .wave-group, .boat, .gull{ animation:none; }
+  }
+
+  /* wave divider */
+  .wave-divider{ display:block; width:100%; height:40px; background:var(--paper); }
+  .wave-divider svg{ width:100%; height:100%; display:block; }
+
+  /* ---------- CONTROLS ---------- */
+  .controls{
+    padding:32px 0 6px;
+    display:flex;
+    flex-wrap:wrap;
+    gap:16px;
+    align-items:center;
+    justify-content:space-between;
+  }
+  .search-box{ position:relative; flex:1 1 240px; max-width:360px; }
+  .search-box input{
+    width:100%;
+    padding:12px 14px 12px 40px;
+    border:1.5px solid var(--paper-dim);
+    background:#fff;
+    border-radius:var(--radius-md);
+    font-family:'Work Sans', sans-serif;
+    font-size:14.5px;
+    color:var(--ink);
+  }
+  .search-box input:focus{ border-color:var(--foam-dim); }
+  .search-icon{
+    position:absolute;
+    left:13px; top:50%;
+    width:16px; height:16px;
+    margin-top:-8px;
+    pointer-events:none;
+  }
+  .search-icon path{ fill:none; stroke:var(--ink-soft); stroke-width:1.8; stroke-linecap:round; }
+
+  .tag-filters{
+    display:flex;
+    gap:8px;
+    overflow-x:auto;
+    -webkit-overflow-scrolling:touch;
+    padding:2px 2px 8px;
+    scrollbar-width:thin;
+    flex-wrap:wrap;
+  }
+  .chip{
+    font-family:'Space Mono', monospace;
+    font-size:12px;
+    letter-spacing:.03em;
+    padding:9px 16px;
+    min-height:40px;
+    border-radius:100px;
+    border:1.5px solid var(--navy-panel);
+    background:#fff;
+    color:var(--navy-panel);
+    cursor:pointer;
+    white-space:nowrap;
+    transition:background .15s, color .15s, transform .12s, box-shadow .15s;
+  }
+  .chip:hover{ background:rgba(18,50,73,0.08); transform:translateY(-1px); }
+  .chip:active{ transform:translateY(0) scale(0.97); }
+  .chip.active{
+    background:var(--navy); color:var(--paper); border-color:var(--navy);
+    font-weight:700;
+    box-shadow:0 4px 10px rgba(11,43,60,0.25);
+  }
+  .chip.fav-chip.active{ background:var(--coral); border-color:var(--coral); box-shadow:0 4px 10px rgba(193,85,58,0.3); }
+
+  /* ---------- CATEGORY SECTIONS / GRID ---------- */
+  .menu-section{ padding:16px 0 60px; }
+  .category-section{ margin-top:38px; }
+  .category-section h2{
+    font-size:1.5rem;
+    padding-bottom:8px;
+    border-bottom:2px solid var(--gold);
+    display:inline-block;
+  }
+  .grid{
+    display:grid;
+    grid-template-columns:repeat(auto-fill, minmax(260px, 1fr));
+    gap:22px;
+    margin-top:22px;
+  }
+  .card{
+    background:#fff;
+    border-radius:var(--radius-lg);
+    overflow:hidden;
+    box-shadow:0 2px 6px rgba(11,43,60,0.08);
+    border:1px solid var(--paper-dim);
+    display:flex;
+    flex-direction:column;
+    transition:transform .18s ease, box-shadow .18s ease;
+  }
+  .card:hover{ transform:translateY(-4px); box-shadow:0 14px 28px rgba(11,43,60,0.14); }
+  .card-img-wrap{ position:relative; }
+  .card-img{ aspect-ratio:4/3; width:100%; object-fit:cover; background:var(--paper-dim); }
+
+  .fav-btn{
+    position:absolute;
+    top:10px; right:10px;
+    width:38px; height:38px;
+    border-radius:50%;
+    border:none;
+    background:rgba(8,31,44,0.55);
+    backdrop-filter:blur(2px);
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    cursor:pointer;
+    padding:0;
+  }
+  .fav-btn svg{ width:19px; height:19px; }
+  .fav-btn path{ fill:none; stroke:#f3ecdc; stroke-width:1.8; transition:fill .15s, stroke .15s; }
+  .fav-btn.active{ background:rgba(193,85,58,0.85); }
+  .fav-btn.active path{ fill:#f3ecdc; stroke:#f3ecdc; }
+
+  .card-body{ padding:16px 18px 18px; display:flex; flex-direction:column; gap:8px; flex:1; }
+  .card-top{ display:flex; justify-content:space-between; align-items:baseline; gap:10px; }
+  .card-top h3{ font-size:1.14rem; line-height:1.2; }
+  .price{ font-family:'Space Mono', monospace; font-weight:700; color:var(--gold); white-space:nowrap; font-size:1rem; }
+  .desc{ font-size:14px; color:var(--ink-soft); margin:0; }
+  .ingredients{ font-size:12.5px; color:var(--ink-soft); margin:4px 0 0; }
+  .ingredients b{ color:var(--ink); font-weight:600; }
+  .allergens{ margin-top:auto; padding-top:10px; display:flex; flex-wrap:wrap; gap:6px; }
+  .allergen-pill{
+    font-family:'Space Mono', monospace; font-size:10.5px; letter-spacing:.03em; text-transform:uppercase;
+    padding:3px 8px; border-radius:100px; background:rgba(193,85,58,0.10); color:var(--coral);
+  }
+  .no-allergens{ font-family:'Space Mono', monospace; font-size:10.5px; color:var(--foam-dim); letter-spacing:.03em; }
+  .tag-row{ display:flex; flex-wrap:wrap; gap:6px; margin-top:2px; }
+  .tag-pill{ font-size:10.5px; font-family:'Space Mono', monospace; color:var(--navy-panel); background:rgba(18,50,73,0.07); padding:3px 8px; border-radius:100px; }
+
+  .empty-state{ text-align:center; padding:60px 20px; color:var(--ink-soft); font-family:'Space Mono', monospace; font-size:14px; }
+
+  /* ---------- FOOTER ---------- */
+  footer{ background:var(--navy-deep); color:#a9c0ba; padding:40px 0 26px; font-size:13.5px; }
+  .footer-inner{ display:flex; justify-content:space-between; flex-wrap:wrap; gap:16px; align-items:center; }
+  footer .brand{ font-family:'Fraunces', serif; color:var(--paper); font-size:1.1rem; }
+  .footer-links{ display:flex; gap:20px; flex-wrap:wrap; align-items:center; }
+  .footer-links button{
+    background:none; border:none; color:#a9c0ba; font-family:'Work Sans', sans-serif; font-size:13.5px;
+    cursor:pointer; text-decoration:underline; text-underline-offset:3px; padding:0;
+  }
+  .footer-links button:hover{ color:var(--foam); }
+
+  /* ---------- MODAL ---------- */
+  .modal-overlay{ position:fixed; inset:0; background:rgba(8,31,44,0.6); display:none; align-items:center; justify-content:center; padding:20px; z-index:50; }
+  .modal-overlay.open{ display:flex; }
+  .modal{ background:var(--paper); max-width:560px; width:100%; max-height:80vh; overflow-y:auto; border-radius:var(--radius-lg); padding:30px; position:relative; }
+  .modal h2{ font-size:1.4rem; margin-bottom:14px; }
+  .modal p{ font-size:14px; color:var(--ink-soft); margin:0 0 12px; }
+  .modal-close{ position:absolute; top:14px; right:14px; background:none; border:none; font-size:20px; cursor:pointer; color:var(--ink-soft); line-height:1; padding:8px; }
+  .modal-close:hover{ color:var(--ink); }
+
+  @media (max-width:640px){
+    .hero{ padding-top:44px; }
+    .top-actions{ top:14px; right:14px; gap:6px; }
+    .lang-toggle, .fav-shortcut{ padding:6px 10px; font-size:11px; min-height:34px; }
+    .fav-shortcut{ padding-left:8px; }
+    .hero-inner{ text-align:center; justify-content:center; }
+    .hero-meta{ justify-content:center; }
+    .controls{ flex-direction:column; align-items:stretch; }
+    .search-box{ max-width:none; }
+    .tag-filters{ flex-wrap:nowrap; }
+    .footer-inner{ flex-direction:column; align-items:flex-start; }
+    .grid{ grid-template-columns:1fr; }
+  }
+  @media (min-width:641px) and (max-width:900px){
+    .grid{ grid-template-columns:repeat(2, 1fr); }
+  }
+</style>
+</head>
+<body>
+
+<header class="hero">
+  <div class="top-actions">
+    <button class="fav-shortcut" id="favShortcut" type="button" aria-label="Ver favoritos">
+      <svg viewBox="0 0 24 24"><path d="M12 20.5s-7.5-4.6-10.1-9.2C0.3 8.2 1.7 4.8 5 4.1c2-0.4 3.8 0.5 5 2.1 1.2-1.6 3-2.5 5-2.1 3.3 0.7 4.7 4.1 3.1 7.2C19.5 15.9 12 20.5 12 20.5z"/></svg>
+      <span class="fav-count" id="favCount">0</span>
+    </button>
+    <button class="lang-toggle" id="langToggle" type="button">EN</button>
+  </div>
+  <div class="wrap hero-inner">
+    <div class="hero-text">
+      <p class="eyebrow" id="txtEyebrow">Gijón &middot; Menú digital</p>
+      <h1 id="txtTitle">La Marea<br><em id="txtTitleEm">menú digital</em></h1>
+      <p class="tag" id="txtTagline">Cocina asturiana a pie de puerto: fabada, mariscos frescos y lo que trae el mar cada mañana.</p>
+      <div class="hero-meta">
+        <div><span id="txtHoursLabel">Horario</span><span id="txtHoursValue">13:00 &ndash; 23:30</span></div>
+      </div>
+    </div>
+    <div class="sea-wrap" aria-hidden="true">
+      <svg class="sea-svg" viewBox="0 0 300 220" fill="none">
+        <!-- sky gulls -->
+        <path class="gull g1" d="M60 40 q6 -8 12 0 q6 -8 12 0" stroke="#8fd1c2" stroke-width="2" stroke-linecap="round"/>
+        <path class="gull g2" d="M210 60 q5 -7 10 0 q5 -7 10 0" stroke="#8fd1c2" stroke-width="2" stroke-linecap="round"/>
+
+        <!-- boat -->
+        <g class="boat">
+          <path d="M136 96 L164 96 L160 104 L140 104 Z" fill="#e0ac48"/>
+          <rect x="149" y="70" width="2" height="28" fill="#f3ecdc"/>
+          <path d="M151 72 L151 92 L166 92 Z" fill="#8fd1c2" opacity="0.85"/>
+        </g>
+
+        <!-- back wave layer -->
+        <g class="wave-group back">
+          <path d="M0 140 Q37 122 75 140 T150 140 T225 140 T300 140 T375 140 T450 140 V220 H0 Z" fill="#123249"/>
+        </g>
+        <!-- front wave layer -->
+        <g class="wave-group">
+          <path d="M0 150 Q37 168 75 150 T150 150 T225 150 T300 150 T375 150 T450 150 V220 H0 Z" fill="#0b2b3c"/>
+        </g>
+      </svg>
+    </div>
+  </div>
+  <div class="wave-divider" aria-hidden="true">
+    <svg viewBox="0 0 1200 40" preserveAspectRatio="none">
+      <path d="M0 20 C 150 40, 350 0, 600 20 C 850 40, 1050 0, 1200 20 L1200 40 L0 40 Z" fill="#f3ecdc"/>
+    </svg>
+  </div>
+</header>
+
+<main class="wrap menu-section">
+  <div class="controls">
+    <div class="search-box">
+      <svg class="search-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M11 4a7 7 0 1 0 0 14 7 7 0 0 0 0-14zm10 17-5.6-5.6"/></svg>
+      <input type="search" id="searchInput" aria-label="Buscar">
+    </div>
+    <div class="tag-filters" id="tagFilters" role="group" aria-label="Filtrar"></div>
+  </div>
+
+  <div id="categoriesWrap" aria-live="polite"></div>
+  <div class="empty-state" id="emptyState" style="display:none;"></div>
+</main>
+
+<footer>
+  <div class="wrap footer-inner">
+    <div class="brand">La Marea</div>
+    <div class="footer-links">
+      <button type="button" id="openLegal"></button>
+      <span id="txtFooterCopy">&copy; 2026 La Marea, Gijón</span>
+    </div>
+  </div>
+</footer>
+
+<div class="modal-overlay" id="legalOverlay">
+  <div class="modal" role="dialog" aria-modal="true" aria-labelledby="legalTitle">
+    <button class="modal-close" id="closeLegal" aria-label="Cerrar">&times;</button>
+    <h2 id="legalTitle"></h2>
+    <p id="legalP1"></p>
+    <p id="legalP2"></p>
+    <p id="legalP3"></p>
+  </div>
+</div>
+
+<script>
+(function(){
+  const categoriesWrap = document.getElementById('categoriesWrap');
+  const emptyState = document.getElementById('emptyState');
+  const searchInput = document.getElementById('searchInput');
+  const tagFiltersEl = document.getElementById('tagFilters');
+  const langToggle = document.getElementById('langToggle');
+  const favShortcut = document.getElementById('favShortcut');
+  const favCountEl = document.getElementById('favCount');
+  const htmlRoot = document.getElementById('htmlRoot');
+
+  const CATEGORIES = [
+    { key:'entrante', es:'Entrantes', en:'Starters' },
+    { key:'principal', es:'Principales', en:'Mains' },
+    { key:'postre', es:'Postres', en:'Desserts' },
+    { key:'bebida', es:'Bebidas', en:'Drinks' }
+  ];
+  const OTHER_LABEL = { es:'Otros', en:'Other' };
+
+  const TAG_LABELS = {
+    'tradicional': { es:'tradicional', en:'traditional' },
+    'especialidad': { es:'especialidad', en:'signature' },
+    'para compartir': { es:'para compartir', en:'to share' },
+    'marisco': { es:'marisco', en:'seafood' },
+    'temporada': { es:'temporada', en:'seasonal' },
+    'queso': { es:'queso', en:'cheese' },
+    'sidra': { es:'sidra', en:'cider' },
+    'sin gluten': { es:'sin gluten', en:'gluten-free' }
+  };
+  const ALLERGEN_LABELS = {
+    'Gluten': { es:'Gluten', en:'Gluten' },
+    'Lácteos': { es:'Lácteos', en:'Dairy' },
+    'Huevo': { es:'Huevo', en:'Egg' },
+    'Marisco': { es:'Marisco', en:'Shellfish' },
+    'Pescado': { es:'Pescado', en:'Fish' },
+    'Sulfitos': { es:'Sulfitos', en:'Sulphites' },
+    'Frutos secos': { es:'Frutos secos', en:'Nuts' }
+  };
+
+  const UI = {
+    es: {
+      eyebrow: 'Gijón · Menú digital',
+      titleEm: 'menú digital',
+      tagline: 'Cocina asturiana a pie de puerto: fabada, mariscos frescos y lo que trae el mar cada mañana.',
+      hoursLabel: 'Horario',
+      hoursValue: '13:00 – 23:30',
+      searchPlaceholder: 'Buscar un plato…',
+      allChip: 'Todos',
+      favChip: 'Favoritos',
+      ingredientsLabel: 'Ingredientes:',
+      noAllergens: 'Sin alérgenos declarados',
+      emptyState: 'Ningún plato coincide con tu búsqueda.',
+      loadError: 'No se pudo cargar el menú. Comprueba que menu.json esté disponible.',
+      legalLinkText: 'Aviso legal y privacidad',
+      footerCopy: '© 2026 La Marea, Gijón',
+      modalTitle: 'Aviso legal y privacidad',
+      modalP1: 'Los precios, ingredientes y disponibilidad de los platos mostrados en este menú pueden variar sin previo aviso. Recomendamos confirmar alérgenos e ingredientes directamente con el personal del restaurante antes de realizar un pedido.',
+      modalP2: 'Esta web no utiliza cookies de seguimiento ni herramientas de analítica. Únicamente se registran los datos técnicos inevitables generados por el servidor (como la dirección IP) con fines de seguridad y prevención de abusos, y no se comparten con terceros con fines comerciales. Tus favoritos se guardan solo en este dispositivo y no se envían a ningún servidor.',
+      modalP3: 'El uso de este menú digital implica la aceptación de que la información aquí mostrada tiene carácter orientativo y no constituye una oferta vinculante.',
+      favAdd: 'Añadir a favoritos',
+      favRemove: 'Quitar de favoritos',
+      favShortcutLabel: 'Ver favoritos',
+      toggleLabel: 'EN'
+    },
+    en: {
+      eyebrow: 'Gijón · Digital menu',
+      titleEm: 'digital menu',
+      tagline: 'Asturian cooking by the harbour: fabada, fresh seafood and whatever the sea brings in each morning.',
+      hoursLabel: 'Hours',
+      hoursValue: '1:00 pm – 11:30 pm',
+      searchPlaceholder: 'Search a dish…',
+      allChip: 'All',
+      favChip: 'Favorites',
+      ingredientsLabel: 'Ingredients:',
+      noAllergens: 'No declared allergens',
+      emptyState: 'No dishes match your search.',
+      loadError: 'Could not load the menu. Check that menu.json is available.',
+      legalLinkText: 'Legal notice & privacy',
+      footerCopy: '© 2026 La Marea, Gijón',
+      modalTitle: 'Legal notice & privacy',
+      modalP1: 'Prices, ingredients and availability of the dishes shown in this menu may change without notice. Please confirm allergens and ingredients directly with restaurant staff before ordering.',
+      modalP2: 'This site uses no tracking cookies and no analytics tools. Only the technical data unavoidably generated by the server (such as IP address) is logged, for security and abuse-prevention purposes, and is never shared with third parties for commercial use. Your favorites are stored only on this device and are never sent to any server.',
+      modalP3: 'Using this digital menu implies acceptance that the information shown here is for guidance only and does not constitute a binding offer.',
+      favAdd: 'Add to favorites',
+      favRemove: 'Remove from favorites',
+      favShortcutLabel: 'View favorites',
+      toggleLabel: 'ES'
+    }
+  };
+
+  const FAVORITES_KEY = 'laMarea:favorites';
+  const LANG_KEY = 'laMarea:lang';
+
+  let allItems = [];
+  let activeFilter = 'all'; // 'all' | category key | 'favorites'
+  let favorites = loadFavorites();
+  let currentLang = loadLang();
+
+  function loadFavorites(){
+    try{
+      const raw = window.localStorage.getItem(FAVORITES_KEY);
+      return new Set(raw ? JSON.parse(raw) : []);
+    }catch(e){ return new Set(); }
+  }
+  function saveFavorites(){
+    try{ window.localStorage.setItem(FAVORITES_KEY, JSON.stringify(Array.from(favorites))); }
+    catch(e){ /* storage unavailable, favorites stay in-memory for this session */ }
+  }
+  function loadLang(){
+    try{
+      const raw = window.localStorage.getItem(LANG_KEY);
+      return raw === 'en' ? 'en' : 'es';
+    }catch(e){ return 'es'; }
+  }
+  function saveLang(){
+    try{ window.localStorage.setItem(LANG_KEY, currentLang); }catch(e){}
+  }
+
+  function updateFavShortcut(){
+    favCountEl.textContent = String(favorites.size);
+    favShortcut.classList.toggle('has-favs', favorites.size > 0);
+  }
+
+  function isFavorite(item){ return favorites.has(String(item.imageNumber)); }
+  function toggleFavorite(item){
+    const id = String(item.imageNumber);
+    if(favorites.has(id)) favorites.delete(id); else favorites.add(id);
+    saveFavorites();
+  }
+
+  function itemText(item){
+    if(currentLang === 'en' && item.translations && item.translations.en){
+      const t = item.translations.en;
+      return {
+        name: t.name || item.name,
+        description: t.description || item.description,
+        ingredients: t.ingredients || item.ingredients,
+        allergens: t.allergens || item.allergens
+      };
+    }
+    return { name:item.name, description:item.description, ingredients:item.ingredients, allergens:item.allergens };
+  }
+  function tagLabel(tag){ return (TAG_LABELS[tag] && TAG_LABELS[tag][currentLang]) || tag; }
+  function allergenLabel(a){ return (ALLERGEN_LABELS[a] && ALLERGEN_LABELS[a][currentLang]) || a; }
+
+  function categoryOf(item){
+    const found = CATEGORIES.find(c => item.tags.includes(c.key));
+    return found ? found.key : 'otros';
+  }
+  function categoryLabel(key){
+    const found = CATEGORIES.find(c => c.key === key);
+    return found ? found[currentLang] : OTHER_LABEL[currentLang];
+  }
+
+  function localImagePath(imageNumber){ return `images/${imageNumber}.jpg`; }
+
+  // NOTE: source.unsplash.com (keyword-based fallback) was retired by Unsplash.
+  // Picsum is used here as a reliable no-key placeholder, seeded per dish so the
+  // same item always gets the same fallback image. Swap in real photo URLs
+  // (images.unsplash.com/photo-...) any time you have specific ones picked out.
+  function fallbackImageUrl(item){
+    const seed = encodeURIComponent(item.name.toLowerCase().replace(/\s+/g, '-'));
+    return `https://picsum.photos/seed/${seed}/480/360`;
+  }
+
+  function applyStaticText(){
+    const t = UI[currentLang];
+    htmlRoot.lang = currentLang;
+    langToggle.textContent = t.toggleLabel;
+    favShortcut.setAttribute('aria-label', t.favShortcutLabel);
+    document.getElementById('txtEyebrow').textContent = t.eyebrow;
+    document.getElementById('txtTitleEm').textContent = t.titleEm;
+    document.getElementById('txtTagline').textContent = t.tagline;
+    document.getElementById('txtHoursLabel').textContent = t.hoursLabel;
+    document.getElementById('txtHoursValue').textContent = t.hoursValue;
+    searchInput.placeholder = t.searchPlaceholder;
+    searchInput.setAttribute('aria-label', t.searchPlaceholder);
+    emptyState.textContent = t.emptyState;
+    document.getElementById('openLegal').textContent = t.legalLinkText;
+    document.getElementById('txtFooterCopy').textContent = t.footerCopy;
+    document.getElementById('legalTitle').textContent = t.modalTitle;
+    document.getElementById('legalP1').textContent = t.modalP1;
+    document.getElementById('legalP2').textContent = t.modalP2;
+    document.getElementById('legalP3').textContent = t.modalP3;
+  }
+
+  function renderTagFilters(){
+    tagFiltersEl.innerHTML = '';
+    const t = UI[currentLang];
+
+    const allChip = document.createElement('button');
+    allChip.className = 'chip active';
+    allChip.type = 'button';
+    allChip.textContent = t.allChip;
+    allChip.addEventListener('click', () => setActiveFilter('all'));
+    tagFiltersEl.appendChild(allChip);
+
+    CATEGORIES.forEach(cat => {
+      if(!allItems.some(i => categoryOf(i) === cat.key)) return;
+      const chip = document.createElement('button');
+      chip.className = 'chip';
+      chip.type = 'button';
+      chip.textContent = cat[currentLang];
+      chip.dataset.filter = cat.key;
+      chip.addEventListener('click', () => setActiveFilter(cat.key));
+      tagFiltersEl.appendChild(chip);
+    });
+
+    const favChip = document.createElement('button');
+    favChip.className = 'chip fav-chip';
+    favChip.type = 'button';
+    favChip.dataset.filter = 'favorites';
+    favChip.textContent = `♥ ${t.favChip}`;
+    favChip.addEventListener('click', () => setActiveFilter('favorites'));
+    tagFiltersEl.appendChild(favChip);
+
+    highlightActiveChip();
+    updateFavShortcut();
+  }
+
+  function highlightActiveChip(){
+    Array.from(tagFiltersEl.children).forEach(chip => {
+      const key = chip.dataset.filter || 'all';
+      chip.classList.toggle('active', key === activeFilter);
+    });
+  }
+
+  function setActiveFilter(key){
+    activeFilter = key;
+    highlightActiveChip();
+    render();
+  }
+
+  function matchesSearch(item, query){
+    if(!query) return true;
+    const text = itemText(item);
+    const haystack = (text.name + ' ' + text.description + ' ' + text.ingredients.join(' ')).toLowerCase();
+    return haystack.includes(query);
+  }
+
+  function heartIconSvg(){
+    return '<svg viewBox="0 0 24 24"><path d="M12 20.5s-7.5-4.6-10.1-9.2C0.3 8.2 1.7 4.8 5 4.1c2-0.4 3.8 0.5 5 2.1 1.2-1.6 3-2.5 5-2.1 3.3 0.7 4.7 4.1 3.1 7.2C19.5 15.9 12 20.5 12 20.5z"/></svg>';
+  }
+
+  function buildCard(item){
+    const t = UI[currentLang];
+    const text = itemText(item);
+    const card = document.createElement('article');
+    card.className = 'card';
+
+    const imgWrap = document.createElement('div');
+    imgWrap.className = 'card-img-wrap';
+
+    const img = document.createElement('img');
+    img.className = 'card-img';
+    img.loading = 'lazy';
+    img.alt = text.name;
+    img.src = localImagePath(item.imageNumber);
+    img.addEventListener('error', function onErr(){
+      img.removeEventListener('error', onErr);
+      img.src = fallbackImageUrl(item);
+    });
+    imgWrap.appendChild(img);
+
+    const favBtn = document.createElement('button');
+    favBtn.type = 'button';
+    favBtn.className = 'fav-btn' + (isFavorite(item) ? ' active' : '');
+    favBtn.setAttribute('aria-pressed', String(isFavorite(item)));
+    favBtn.setAttribute('aria-label', isFavorite(item) ? t.favRemove : t.favAdd);
+    favBtn.innerHTML = heartIconSvg();
+    favBtn.addEventListener('click', () => {
+      toggleFavorite(item);
+      renderTagFilters();
+      render();
+    });
+    imgWrap.appendChild(favBtn);
+
+    card.appendChild(imgWrap);
+
+    const body = document.createElement('div');
+    body.className = 'card-body';
+
+    const top = document.createElement('div');
+    top.className = 'card-top';
+    const h3 = document.createElement('h3');
+    h3.textContent = text.name;
+    const price = document.createElement('span');
+    price.className = 'price';
+    price.textContent = `${item.price.toFixed(2)} €`;
+    top.appendChild(h3);
+    top.appendChild(price);
+    body.appendChild(top);
+
+    const desc = document.createElement('p');
+    desc.className = 'desc';
+    desc.textContent = text.description;
+    body.appendChild(desc);
+
+    const ingredients = document.createElement('p');
+    ingredients.className = 'ingredients';
+    ingredients.innerHTML = `<b>${t.ingredientsLabel}</b> ${text.ingredients.join(', ')}`;
+    body.appendChild(ingredients);
+
+    if(item.tags && item.tags.length){
+      const tagRow = document.createElement('div');
+      tagRow.className = 'tag-row';
+      item.tags.forEach(tg => {
+        const pill = document.createElement('span');
+        pill.className = 'tag-pill';
+        pill.textContent = tagLabel(tg);
+        tagRow.appendChild(pill);
+      });
+      body.appendChild(tagRow);
+    }
+
+    const allergenRow = document.createElement('div');
+    allergenRow.className = 'allergens';
+    if(text.allergens && text.allergens.length){
+      text.allergens.forEach(a => {
+        const pill = document.createElement('span');
+        pill.className = 'allergen-pill';
+        pill.textContent = allergenLabel(a);
+        allergenRow.appendChild(pill);
+      });
+    } else {
+      const none = document.createElement('span');
+      none.className = 'no-allergens';
+      none.textContent = t.noAllergens;
+      allergenRow.appendChild(none);
+    }
+    body.appendChild(allergenRow);
+
+    card.appendChild(body);
+    return card;
+  }
+
+  function render(){
+    const query = searchInput.value.trim().toLowerCase();
+    let filtered = allItems.filter(item => matchesSearch(item, query));
+
+    if(activeFilter === 'favorites'){
+      filtered = filtered.filter(isFavorite);
+    } else if(activeFilter !== 'all'){
+      filtered = filtered.filter(item => categoryOf(item) === activeFilter);
+    }
+
+    categoriesWrap.innerHTML = '';
+
+    if(filtered.length === 0){
+      emptyState.textContent = UI[currentLang].emptyState;
+      emptyState.style.display = 'block';
+      return;
+    }
+    emptyState.style.display = 'none';
+
+    const groupOrder = [...CATEGORIES.map(c => c.key), 'otros'];
+    groupOrder.forEach(catKey => {
+      const items = filtered.filter(i => categoryOf(i) === catKey);
+      if(items.length === 0) return;
+
+      const section = document.createElement('section');
+      section.className = 'category-section';
+
+      const h2 = document.createElement('h2');
+      h2.textContent = categoryLabel(catKey);
+      section.appendChild(h2);
+
+      const grid = document.createElement('div');
+      grid.className = 'grid';
+      items.forEach(item => grid.appendChild(buildCard(item)));
+      section.appendChild(grid);
+
+      categoriesWrap.appendChild(section);
+    });
+  }
+
+  function refreshAll(){
+    applyStaticText();
+    renderTagFilters();
+    render();
+  }
+
+  searchInput.addEventListener('input', render);
+
+  langToggle.addEventListener('click', () => {
+    currentLang = currentLang === 'es' ? 'en' : 'es';
+    saveLang();
+    refreshAll();
+  });
+
+  favShortcut.addEventListener('click', () => {
+    setActiveFilter('favorites');
+    document.getElementById('categoriesWrap').scrollIntoView({ behavior:'smooth', block:'start' });
+  });
+
+  fetch('menu.json')
+    .then(res => {
+      if(!res.ok) throw new Error('menu.json not found');
+      return res.json();
+    })
+    .then(data => {
+      allItems = data;
+      applyStaticText();
+      renderTagFilters();
+      render();
+    })
+    .catch(err => {
+      categoriesWrap.innerHTML = '';
+      emptyState.textContent = UI[currentLang].loadError;
+      emptyState.style.display = 'block';
+      console.error(err);
+    });
+
+  // Legal modal
+  const overlay = document.getElementById('legalOverlay');
+  const openBtn = document.getElementById('openLegal');
+  const closeBtn = document.getElementById('closeLegal');
+
+  function openModal(){ overlay.classList.add('open'); closeBtn.focus(); }
+  function closeModal(){ overlay.classList.remove('open'); openBtn.focus(); }
+  openBtn.addEventListener('click', openModal);
+  closeBtn.addEventListener('click', closeModal);
+  overlay.addEventListener('click', e => { if(e.target === overlay) closeModal(); });
+  document.addEventListener('keydown', e => {
+    if(e.key === 'Escape' && overlay.classList.contains('open')) closeModal();
+  });
+
+  applyStaticText();
+})();
+</script>
+
+</body>
+</html>
