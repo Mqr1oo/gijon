@@ -1,0 +1,172 @@
+[
+  {
+    "imageNumber": 1,
+    "name": "Fabada Asturiana",
+    "price": 16.50,
+    "description": "Guiso de fabes cocinado a fuego lento, con carnes ahumadas y un toque de pimentón.",
+    "ingredients": ["Fabes", "Chorizo", "Morcilla", "Panceta", "Azafrán"],
+    "allergens": ["Sulfitos"],
+    "tags": ["principal", "tradicional", "sin gluten"],
+    "translations": {
+      "en": {
+        "name": "Fabada Asturiana",
+        "description": "A slow-simmered bean stew from the Asturian highlands, with smoky cured meats and a touch of paprika.",
+        "ingredients": ["White beans", "Chorizo", "Blood sausage", "Pork belly", "Saffron"],
+        "allergens": ["Sulphites"]
+      }
+    }
+  },
+  {
+    "imageNumber": 2,
+    "name": "Cachopo de Cabrales",
+    "price": 19.00,
+    "description": "Dos filetes de ternera empanados y rellenos de queso Cabrales fundido y jamón serrano, fritos al momento.",
+    "ingredients": ["Ternera", "Jamón serrano", "Queso Cabrales", "Pan rallado", "Huevo"],
+    "allergens": ["Gluten", "Lácteos", "Huevo"],
+    "tags": ["principal", "especialidad", "para compartir"],
+    "translations": {
+      "en": {
+        "name": "Cachopo de Cabrales",
+        "description": "Two breaded veal fillets folded around melted Cabrales blue cheese and serrano ham, fried to order.",
+        "ingredients": ["Veal", "Serrano ham", "Cabrales cheese", "Breadcrumbs", "Egg"],
+        "allergens": ["Gluten", "Dairy", "Egg"]
+      }
+    }
+  },
+  {
+    "imageNumber": 3,
+    "name": "Oricios al Natural",
+    "price": 14.00,
+    "description": "Erizos de mar servidos crudos en su concha, recién llegados de la costa cantábrica, con un toque de limón.",
+    "ingredients": ["Erizo de mar", "Limón"],
+    "allergens": ["Marisco"],
+    "tags": ["entrante", "marisco", "temporada"],
+    "translations": {
+      "en": {
+        "name": "Sea Urchin, Natural",
+        "description": "Sea urchin served raw in the shell, straight off the Cantabrian coast, with a squeeze of lemon.",
+        "ingredients": ["Sea urchin", "Lemon"],
+        "allergens": ["Shellfish"]
+      }
+    }
+  },
+  {
+    "imageNumber": 4,
+    "name": "Tortos de Maíz con Picadillo",
+    "price": 9.50,
+    "description": "Tortas de maíz crujientes cubiertas de picadillo de cerdo especiado y huevo frito.",
+    "ingredients": ["Harina de maíz", "Picadillo de cerdo", "Huevo frito", "Pimentón"],
+    "allergens": ["Huevo"],
+    "tags": ["entrante", "tradicional"],
+    "translations": {
+      "en": {
+        "name": "Corn Tortos with Picadillo",
+        "description": "Crisp corn flatbreads topped with spiced minced pork and a fried egg.",
+        "ingredients": ["Corn flour", "Minced pork", "Fried egg", "Paprika"],
+        "allergens": ["Egg"]
+      }
+    }
+  },
+  {
+    "imageNumber": 5,
+    "name": "Merluza a la Sidra",
+    "price": 18.00,
+    "description": "Lomo de merluza cocinado en salsa de sidra y perejil, con almejas y patata.",
+    "ingredients": ["Merluza", "Sidra", "Almejas", "Patata", "Perejil", "Ajo"],
+    "allergens": ["Pescado", "Marisco", "Sulfitos"],
+    "tags": ["principal", "marisco", "especialidad"],
+    "translations": {
+      "en": {
+        "name": "Hake in Cider Sauce",
+        "description": "Hake fillet gently cooked in a cider and parsley sauce with clams and potato.",
+        "ingredients": ["Hake", "Cider", "Clams", "Potato", "Parsley", "Garlic"],
+        "allergens": ["Fish", "Shellfish", "Sulphites"]
+      }
+    }
+  },
+  {
+    "imageNumber": 6,
+    "name": "Queso de Cabrales con Miel",
+    "price": 8.00,
+    "description": "Queso azul de cueva de los Picos de Europa, con un hilo de miel local y nueces.",
+    "ingredients": ["Queso Cabrales", "Miel", "Nueces"],
+    "allergens": ["Lácteos", "Frutos secos"],
+    "tags": ["entrante", "queso", "sin gluten"],
+    "translations": {
+      "en": {
+        "name": "Cabrales Cheese with Honey",
+        "description": "Cave-aged blue cheese from the Picos de Europa, drizzled with local honey and walnuts.",
+        "ingredients": ["Cabrales cheese", "Honey", "Walnuts"],
+        "allergens": ["Dairy", "Nuts"]
+      }
+    }
+  },
+  {
+    "imageNumber": 7,
+    "name": "Arroz con Leche Quemado",
+    "price": 6.50,
+    "description": "Cremoso arroz con leche asturiano, frío, terminado con una capa de azúcar caramelizada.",
+    "ingredients": ["Arroz", "Leche", "Canela", "Piel de limón", "Azúcar"],
+    "allergens": ["Lácteos"],
+    "tags": ["postre", "tradicional", "sin gluten"],
+    "translations": {
+      "en": {
+        "name": "Burnt Rice Pudding",
+        "description": "Creamy Asturian rice pudding, chilled and finished with a caramelised sugar crust.",
+        "ingredients": ["Rice", "Milk", "Cinnamon", "Lemon zest", "Sugar"],
+        "allergens": ["Dairy"]
+      }
+    }
+  },
+  {
+    "imageNumber": 8,
+    "name": "Sidra Natural (Botella)",
+    "price": 7.00,
+    "description": "Sidra natural seca de un llagar local, escanciada desde lo alto al estilo tradicional.",
+    "ingredients": ["Zumo de manzana fermentado"],
+    "allergens": ["Sulfitos"],
+    "tags": ["bebida", "sidra", "tradicional"],
+    "translations": {
+      "en": {
+        "name": "Natural Cider (Bottle)",
+        "description": "Dry natural cider from a local cider house, poured from height in the traditional style.",
+        "ingredients": ["Fermented apple juice"],
+        "allergens": ["Sulphites"]
+      }
+    }
+  },
+  {
+    "imageNumber": 9,
+    "name": "Pote Asturiano",
+    "price": 15.00,
+    "description": "Guiso de montaña con alubias blancas, berza, patata y carnes curadas.",
+    "ingredients": ["Alubias blancas", "Berza", "Patata", "Chorizo", "Costilla de cerdo"],
+    "allergens": [],
+    "tags": ["principal", "tradicional", "sin gluten"],
+    "translations": {
+      "en": {
+        "name": "Pote Asturiano",
+        "description": "A hearty highland stew of white beans, cabbage, potato and cured pork.",
+        "ingredients": ["White beans", "Cabbage", "Potato", "Chorizo", "Pork rib"],
+        "allergens": []
+      }
+    }
+  },
+  {
+    "imageNumber": 10,
+    "name": "Casadielles Fritas",
+    "price": 6.00,
+    "description": "Empanadillas rellenas de nuez y anís, fritas y espolvoreadas con azúcar.",
+    "ingredients": ["Harina", "Nueces", "Licor de anís", "Azúcar", "Mantequilla"],
+    "allergens": ["Gluten", "Frutos secos", "Lácteos"],
+    "tags": ["postre", "tradicional"],
+    "translations": {
+      "en": {
+        "name": "Fried Casadielles",
+        "description": "Pastry parcels filled with walnut and anise, fried and dusted with sugar.",
+        "ingredients": ["Flour", "Walnuts", "Anise liqueur", "Sugar", "Butter"],
+        "allergens": ["Gluten", "Nuts", "Dairy"]
+      }
+    }
+  }
+]
