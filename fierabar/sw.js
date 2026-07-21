@@ -1,11 +1,11 @@
-const CACHE_NAME = 'fiera-cache-v1';
+const CACHE_NAME = 'fierabar-cache-v2';
 
 const urlsToCache = [
-  '/',
-  '/index.html',
-  '/menu.json',
-  '/config.json',
-  '/manifest.json'
+  './',
+  './index.html',
+  './menu.json',
+  './config.json',
+  './manifest.json'
 ];
 
 self.addEventListener('install', event => {
