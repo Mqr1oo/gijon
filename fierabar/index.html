@@ -1,3 +1,4 @@
+```html
 <!DOCTYPE html>
 <html lang="es" id="htmlRoot">
 <head>
@@ -128,7 +129,6 @@
   .fav-shortcut.has-favs{ border-color:var(--pink-main); background: rgba(255, 42, 133, 0.15);}
   .fav-shortcut.has-favs path{ fill:var(--pink-main); stroke:var(--pink-main); }
   .fav-count{ min-width:14px; text-align:left; font-weight: 600;}
-  
   .hero-inner{
     display:flex;
     flex-wrap:wrap;
@@ -182,7 +182,7 @@
   }
   .hero-meta span{ display:block; color:var(--ink-soft); font-size:11px; letter-spacing:.06em; margin-bottom:3px; }
 
-  /* ILUSTRAȚIE NOUĂ PAHAR COCKTAIL (Geometric & Minimalist) */
+  /* ILUSTRAȚIE PAHAR COCKTAIL ROZ (FĂRĂ ANIMAZIE) */
   .cocktail-wrap{
     flex:1 1 200px;
     min-width:180px;
@@ -191,12 +191,9 @@
     display:flex;
     justify-content:center;
   }
-  .cocktail-svg{ 
-    width:100%; 
-    height:auto; 
-    filter: drop-shadow(0 15px 30px rgba(255, 42, 133, 0.25)); 
-  }
+  .cocktail-svg{ width:100%; height:auto; filter: drop-shadow(0 10px 20px rgba(255, 42, 133, 0.2)); }
 
+  /* ---------- CONTROLS ---------- */
   .controls{
     padding: 24px 0 10px;
     display: flex;
@@ -280,6 +277,7 @@
     box-shadow: 0 4px 12px rgba(255, 42, 133, 0.35);
   }
   
+  /* ---------- CATEGORY SECTIONS / GRID ---------- */
   .menu-section{ padding: 10px 0 160px; }
   .category-section{ margin-top:38px; }
   .category-section h2{
@@ -317,6 +315,7 @@
   .card-img{ aspect-ratio:4/3; width:100%; object-fit:cover; background:var(--bg-panel); transition: transform 0.5s ease; }
   .card:hover .card-img { transform: scale(1.05); }
 
+  /* RIBBON "ESPECIALIDAD" */
   .ribbon {
     position: absolute;
     top: 14px;
@@ -348,13 +347,15 @@
     100% { transform: scale(1); }
   }
 
+  /* MUTAT IN STANGA JOS */
   .fav-btn{
     position:absolute;
-    top:12px; right:12px;
+    bottom:12px; left:12px; /* Schimbat de sus-dreapta in stanga-jos */
+    top:auto; right:auto;
     width:42px; height:42px; 
     border-radius:50%;
     border:1px solid rgba(255,255,255,0.15);
-    background:rgba(5, 5, 5, 0.6);
+    background:rgba(5, 5, 5, 0.7);
     backdrop-filter:blur(6px);
     -webkit-backdrop-filter:blur(6px);
     display:flex;
@@ -372,28 +373,29 @@
   .fav-btn.active path{ fill:#fff; stroke:#fff; }
   .fav-btn.pop-anim svg { animation: heartPop 0.35s cubic-bezier(0.34, 1.56, 0.64, 1) forwards; }
 
+  /* QUANTITY CONTROLS (IN STANGA JOS) */
   .qty-controls {
     position: absolute;
-    bottom: 10px;
-    right: 10px;
+    bottom: 12px; left: 12px; /* Aliniat la fel in stanga-jos */
+    top:auto; right:auto;
     display: flex;
     align-items: center;
     background: rgba(18, 18, 18, 0.95);
-    border: 1px solid var(--paper-dim);
+    border: 1px solid var(--pink-main);
     backdrop-filter: blur(4px);
     -webkit-backdrop-filter: blur(4px);
     border-radius: 100px;
-    box-shadow: 0 4px 12px rgba(0,0,0,0.4);
+    box-shadow: 0 4px 12px rgba(255, 42, 133, 0.3);
     overflow: hidden;
     z-index: 10;
   }
   .qty-btn {
-    width: 32px;
-    height: 32px;
+    width: 34px;
+    height: 34px;
     border: none;
     background: transparent;
     color: var(--ink);
-    font-size: 1.2rem;
+    font-size: 1.3rem;
     font-weight: 700;
     cursor: pointer;
     display: flex;
@@ -403,11 +405,11 @@
   }
   .qty-btn:active { background: var(--pink-main); color: #fff;}
   .qty-val {
-    width: 24px;
+    width: 26px;
     text-align: center;
     font-family: 'Space Mono', monospace;
     font-weight: 700;
-    font-size: 0.9rem;
+    font-size: 0.95rem;
     color: var(--pink-bright);
   }
 
@@ -430,6 +432,7 @@
 
   .empty-state{ text-align:center; padding:60px 20px; color:var(--ink-soft); font-family:'Space Mono', monospace; font-size:14px; }
 
+  /* ---------- TOTAL BAR ---------- */
   .total-bar {
     position: fixed;
     bottom: 0;
@@ -493,6 +496,7 @@
   }
   .btn-waiter svg { width: 18px; height: 18px; stroke: currentColor; stroke-width: 2; fill: none; stroke-linecap: round; stroke-linejoin: round;}
 
+  /* ---------- SCROLL TO TOP BTN ---------- */
   .scroll-top-btn {
     position: fixed;
     bottom: 24px;
@@ -520,12 +524,64 @@
   .scroll-top-btn svg { width: 24px; height: 24px; stroke: currentColor; stroke-width: 2.5; fill: none; stroke-linecap: round; stroke-linejoin: round;}
   .scroll-top-btn:active { background: var(--pink-bright); transform: scale(0.92); }
 
+  /* ---------- MODAL WELCOME (NOU) ---------- */
+  .welcome-overlay {
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.85);
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+    z-index: 300;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.5s ease;
+  }
+  .welcome-overlay.show {
+    opacity: 1;
+    pointer-events: auto;
+  }
+  .welcome-modal {
+    background: var(--bg-card);
+    border: 1px solid var(--pink-main);
+    border-radius: var(--radius-lg);
+    padding: 36px 24px;
+    text-align: center;
+    max-width: 360px;
+    width: 100%;
+    box-shadow: 0 20px 50px rgba(255, 42, 133, 0.2);
+    transform: scale(0.9) translateY(20px);
+    transition: transform 0.5s cubic-bezier(0.2, 0.8, 0.2, 1);
+  }
+  .welcome-overlay.show .welcome-modal {
+    transform: scale(1) translateY(0);
+  }
+  .welcome-icon {
+    width: 70px;
+    height: 70px;
+    margin: 0 auto 20px;
+    background: rgba(255, 42, 133, 0.15);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--pink-main);
+  }
+  .welcome-icon svg { width: 36px; height: 36px; fill: currentColor; }
+  .welcome-modal h2 { font-size: 1.6rem; color: var(--ink); margin-bottom: 12px; }
+  .welcome-modal p { font-size: 15px; color: var(--ink-soft); margin-bottom: 24px; line-height: 1.5; }
+
+  /* ---------- FOOTER ---------- */
   footer{ background:var(--bg-card); border-top: 1px solid var(--paper-dim); color:var(--ink-soft); padding:40px 0 26px; font-size:13.5px; }
   .footer-inner{ display:flex; justify-content:space-between; flex-wrap:wrap; gap:16px; align-items:center; }
   footer .brand{ font-family:'Fraunces', serif; color:var(--ink); font-size:1.1rem; }
   .footer-links{ display:flex; gap:20px; flex-wrap:wrap; align-items:center; }
   .footer-links button{ background:none; border:none; color:var(--ink-soft); font-family:'Work Sans', sans-serif; font-size:13.5px; cursor:pointer; text-decoration:underline; text-underline-offset:3px; padding:0; }
 
+  /* ---------- MODALS LEGAL & WA ---------- */
   .modal-overlay{ position:fixed; inset:0; background:rgba(0,0,0,0.85); display:none; align-items:center; justify-content:center; padding:20px; z-index:150; backdrop-filter: blur(6px); -webkit-backdrop-filter: blur(6px);}
   .modal-overlay.open{ display:flex; }
   .modal{ background:var(--bg-card); border: 1px solid var(--paper-dim); max-width:400px; width:100%; max-height:90vh; overflow-y:auto; border-radius:var(--radius-lg); padding:30px; position:relative; box-shadow: 0 20px 40px rgba(0,0,0,0.6);}
@@ -550,7 +606,7 @@
   
   .btn-submit {
     width: 100%;
-    background: #25D366;
+    background: var(--pink-main);
     color: white;
     border: none;
     padding: 14px;
@@ -560,7 +616,9 @@
     font-family: 'Work Sans', sans-serif;
     cursor: pointer;
   }
+  .btn-submit.green { background: #25D366; }
 
+  /* ---------- WAITER MODE ---------- */
   .waiter-mode {
     position: fixed;
     inset: 0;
@@ -673,16 +731,16 @@
       </div>
     </div>
     
-    <!-- ILUSTRAȚIE NOUĂ: Pahar de cocktail curat, geometric, exact ca în referință -->
+    <!-- ILUSTRAȚIE FIXĂ: Pahar de cocktail geometric alb cu roz -->
     <div class="cocktail-wrap" aria-hidden="true">
       <svg class="cocktail-svg" viewBox="0 0 200 200" fill="none" xmlns="http://www.w3.org/2000/svg">
-        <!-- Paiul alb (înclinat corect) -->
+        <!-- Paiul -->
         <line x1="130" y1="20" x2="85" y2="120" stroke="#ffffff" stroke-width="4" stroke-linecap="round"/>
-        <!-- Lichidul roz din interiorul triunghiului -->
+        <!-- Lichidul roz din interior -->
         <polygon points="44,80 156,80 100,136" fill="#ff2a85" />
-        <!-- Paharul de cocktail (Triunghi alb curat, exact ca logo-ul) -->
+        <!-- Paharul de cocktail -->
         <polygon points="25,60 175,60 100,140" stroke="#ffffff" stroke-width="5" stroke-linejoin="round"/>
-        <!-- Piciorul și baza paharului -->
+        <!-- Piciorul și baza -->
         <line x1="100" y1="140" x2="100" y2="185" stroke="#ffffff" stroke-width="5" stroke-linecap="round"/>
         <line x1="65" y1="185" x2="135" y2="185" stroke="#ffffff" stroke-width="5" stroke-linecap="round"/>
       </svg>
@@ -724,6 +782,18 @@
   <svg viewBox="0 0 24 24"><path d="M18 15l-6-6-6 6"/></svg>
 </button>
 
+<!-- ---------- MODAL WELCOME (POP-UP) ---------- -->
+<div class="welcome-overlay" id="welcomeOverlay">
+  <div class="welcome-modal">
+    <div class="welcome-icon">
+      <svg viewBox="0 0 24 24"><path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/></svg>
+    </div>
+    <h2 id="txtWelcomeTitle">¡Bienvenidos!</h2>
+    <p id="txtWelcomeDesc">Explora nuestro menú y añade tus favoritos.</p>
+    <button class="btn-submit" id="btnWelcomeClose">¡Empezar!</button>
+  </div>
+</div>
+
 <footer>
   <div class="wrap footer-inner">
     <div class="brand">Fiera Bar</div>
@@ -750,7 +820,7 @@
     <h2 id="txtWaModalTitle">Número de Mesa</h2>
     <p id="txtWaModalDesc">Por favor, indica tu número de mesa para que podamos llevarte el pedido.</p>
     <input type="number" id="tableNumberInput" class="input-table" placeholder="Ej: 4">
-    <button class="btn-submit" id="sendWaBtn">Enviar por WhatsApp</button>
+    <button class="btn-submit green" id="sendWaBtn">Enviar por WhatsApp</button>
   </div>
 </div>
 
@@ -845,7 +915,12 @@
       waiterTitle: 'Selección de la Mesa',
       closeWaiterBtn: 'Volver al Menú',
       clearWaiterBtn: '¡Pedido Tomado!',
-      whatsappIntro: '¡Hola! Somos la mesa {mesa}. Nos gustaría pedir:'
+      whatsappIntro: '¡Hola! Somos la mesa {mesa}. Nos gustaría pedir:',
+      
+      // TEXTE WELCOME SCREEN 
+      welcomeTitle: '¡Bienvenidos a Fiera Bar!',
+      welcomeDesc: 'Explora nuestro menú y usa el corazón (♡) para añadir tus platos y cócteles a tu pedido.',
+      welcomeBtn: '¡Empezar a pedir!'
     },
     en: {
       eyebrow: 'Digital menu',
@@ -878,7 +953,12 @@
       waiterTitle: 'Table Selection',
       closeWaiterBtn: 'Back to Menu',
       clearWaiterBtn: 'Order Taken!',
-      whatsappIntro: 'Hi! We are table {mesa}. We would like to order:'
+      whatsappIntro: 'Hi! We are table {mesa}. We would like to order:',
+
+      // TEXTE WELCOME SCREEN
+      welcomeTitle: 'Welcome to Fiera Bar!',
+      welcomeDesc: 'Explore our menu and use the heart (♡) to add dishes and cocktails to your order.',
+      welcomeBtn: 'Start ordering!'
     }
   };
 
@@ -956,17 +1036,16 @@
     return found ? found[currentLang] : OTHER_LABEL[currentLang];
   }
 
-  /* LOGICA NOUĂ DE FALLBACK PENTRU MÂNCARE ȘI BĂUTURI */
   function localImagePath(imageNumber){ return `images/${imageNumber}.jpg`; }
+  
+  /* LIBRĂRIE INTELIGENTĂ IMAGINI FALLBACK */
   function fallbackImageUrl(item){
     let seed = 0;
     if(item.name) { for (let i = 0; i < item.name.length; i++) seed += item.name.charCodeAt(i); }
     
-    // Verificăm ce fel de produs este pe baza etichetelor
     let isDrink = item.tags && (item.tags.includes('coctel') || item.tags.includes('bebida') || item.tags.includes('sidra'));
     let category = isDrink ? 'cocktail,drink' : 'food,tapas,meal';
     
-    // Caută pe server imagini corespunzătoare
     return `https://loremflickr.com/480/360/${category}?lock=${seed}`;
   }
 
@@ -1002,6 +1081,11 @@
     document.getElementById('txtWaiterTitle').textContent = t.waiterTitle;
     document.getElementById('closeWaiterBtn').textContent = t.closeWaiterBtn;
     document.getElementById('clearWaiterBtn').textContent = t.clearWaiterBtn;
+
+    /* APLICARE TEXTE WELCOME MODAL */
+    document.getElementById('txtWelcomeTitle').textContent = t.welcomeTitle;
+    document.getElementById('txtWelcomeDesc').textContent = t.welcomeDesc;
+    document.getElementById('btnWelcomeClose').textContent = t.welcomeBtn;
   }
 
   function renderTagFilters(){
@@ -1346,6 +1430,21 @@
       applyStaticText();
       renderTagFilters();
       render();
+      
+      /* AFIȘARE WELCOME MODAL LA PRIMA VIZITĂ */
+      if(!sessionStorage.getItem('fieraWelcomed')) {
+          const welcomeOverlay = document.getElementById('welcomeOverlay');
+          
+          // Afișăm modalul după jumătate de secundă ca să se vadă animația
+          setTimeout(() => {
+              welcomeOverlay.classList.add('show');
+          }, 500);
+
+          document.getElementById('btnWelcomeClose').addEventListener('click', () => {
+              welcomeOverlay.classList.remove('show');
+              sessionStorage.setItem('fieraWelcomed', 'true');
+          });
+      }
   }).catch(err => {
       console.error(err);
       emptyState.textContent = UI[currentLang].loadError;
