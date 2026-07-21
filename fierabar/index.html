@@ -1,4 +1,4 @@
-
+```html
 <!DOCTYPE html>
 <html lang="es" id="htmlRoot">
 <head>
@@ -6,6 +6,22 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
 <title>La Marea &mdash; Menú digital, Gijón</title>
 <meta name="description" content="Menú digital de La Marea, cocina asturiana en Gijón.">
+
+<!-- ===== SETĂRI APLICAȚIE (PWA) ===== -->
+<link rel="manifest" href="manifest.json">
+<meta name="theme-color" content="#081f2c">
+<link rel="apple-touch-icon" href="icons/icon-192.png">
+<script>
+  if ('serviceWorker' in navigator) {
+    window.addEventListener('load', () => {
+      navigator.serviceWorker.register('sw.js')
+        .then(registration => console.log('App PWA activată cu succes!'))
+        .catch(err => console.log('Eroare activare App: ', err));
+    });
+  }
+</script>
+<!-- ================================== -->
+
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600;9..144,700&family=Work+Sans:wght@400;500;600;700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
@@ -436,7 +452,7 @@
 
   .empty-state{ text-align:center; padding:60px 20px; color:var(--ink-soft); font-family:'Space Mono', monospace; font-size:14px; }
 
-  /* ---------- TOTAL BAR (Sticky Bottom - Redesigned for multiple actions) ---------- */
+  /* ---------- TOTAL BAR ---------- */
   .total-bar {
     position: fixed;
     bottom: 0;
@@ -574,7 +590,7 @@
     cursor: pointer;
   }
 
-  /* ---------- WAITER MODE (Fullscreen display) ---------- */
+  /* ---------- WAITER MODE ---------- */
   .waiter-mode {
     position: fixed;
     inset: 0;
@@ -656,7 +672,7 @@
     .footer-inner{ flex-direction:column; align-items:flex-start; }
     .grid{ grid-template-columns:1fr; }
     
-    .action-buttons { flex-direction: column; } /* Stivuim butoanele pe telefoane mici */
+    .action-buttons { flex-direction: column; }
     .scroll-top-btn.lift { bottom: 180px; }
   }
   @media (min-width:641px){
@@ -686,7 +702,6 @@
         <div><span id="txtHoursLabel">Horario</span><span id="txtHoursValue">13:00 &ndash; 23:30</span></div>
       </div>
     </div>
-    <!-- Decorativ (Valuri) -->
     <div class="sea-wrap" aria-hidden="true">
       <svg class="sea-svg" viewBox="0 0 300 220" fill="none">
         <path class="gull g1" d="M60 40 q6 -8 12 0 q6 -8 12 0" stroke="#8fd1c2" stroke-width="2" stroke-linecap="round"/>
@@ -725,7 +740,6 @@
   <div class="empty-state" id="emptyState" style="display:none;"></div>
 </main>
 
-<!-- BARA DE TOTAL FIXĂ CU 2 ACȚIUNI -->
 <div class="total-bar" id="totalBar">
   <div class="total-header">
     <span class="total-label" id="txtTotalLabel">Total Selección:</span>
@@ -757,7 +771,6 @@
   </div>
 </footer>
 
-<!-- MODAL LEGAL -->
 <div class="modal-overlay" id="legalOverlay">
   <div class="modal" role="dialog" aria-modal="true" aria-labelledby="legalTitle">
     <button class="modal-close" id="closeLegal" aria-label="Cerrar">&times;</button>
@@ -768,7 +781,6 @@
   </div>
 </div>
 
-<!-- MODAL WHATSAPP PENTRU NUMĂR MASĂ -->
 <div class="modal-overlay" id="waOverlay">
   <div class="modal" role="dialog" aria-modal="true">
     <button class="modal-close" id="closeWaModal" aria-label="Cerrar">&times;</button>
@@ -779,7 +791,6 @@
   </div>
 </div>
 
-<!-- ECRAN FULLSCREEN MOD CHELNER -->
 <div class="waiter-mode" id="waiterScreen">
   <div class="waiter-header">
     <h2 id="txtWaiterTitle">Tu Selección</h2>
@@ -807,7 +818,7 @@
   const totalAmount = document.getElementById('totalAmount');
   const scrollTopBtn = document.getElementById('scrollTopBtn');
   
-  let appConfig = { whatsapp_number: "" }; // Setat inițial gol, va fi populat din config.json
+  let appConfig = { whatsapp_number: "" }; 
 
   const CATEGORIES = [
     { key:'entrante', es:'Entrantes', en:'Starters' },
@@ -911,8 +922,6 @@
 
   let allItems = [];
   let activeFilter = 'all';
-  
-  // În loc de Set(), acum folosim un Obiect pentru a stoca cantitatea: { "id_produs": cantitate }
   let favoritesQty = loadFavorites();
   let currentLang = loadLang();
 
@@ -1005,23 +1014,19 @@
     document.getElementById('openLegal').textContent = t.legalLinkText;
     document.getElementById('txtFooterCopy').textContent = t.footerCopy;
     
-    // Modals
     document.getElementById('legalTitle').textContent = t.modalTitle;
     document.getElementById('legalP1').textContent = t.modalP1;
     document.getElementById('legalP2').textContent = t.modalP2;
     document.getElementById('legalP3').textContent = t.modalP3;
     
-    // Bottom Bar
     document.getElementById('txtTotalLabel').textContent = t.totalLabel;
     document.getElementById('txtBtnWhatsApp').textContent = t.btnWhatsApp;
     document.getElementById('txtBtnWaiter').textContent = t.btnWaiter;
     
-    // WA Modal
     document.getElementById('txtWaModalTitle').textContent = t.waModalTitle;
     document.getElementById('txtWaModalDesc').textContent = t.waModalDesc;
     document.getElementById('sendWaBtn').textContent = t.sendWaBtn;
     
-    // Waiter Screen
     document.getElementById('txtWaiterTitle').textContent = t.waiterTitle;
     document.getElementById('closeWaiterBtn').textContent = t.closeWaiterBtn;
     document.getElementById('clearWaiterBtn').textContent = t.clearWaiterBtn;
@@ -1104,16 +1109,13 @@
     });
     imgWrap.appendChild(img);
 
-    // Initial heart button (adds 1 to favorites)
     const favBtn = document.createElement('button');
     favBtn.type = 'button';
     
-    // We only show the initial heart if quantity is 0
     let currentQty = getQty(item);
     favBtn.className = 'fav-btn' + (currentQty > 0 ? ' active' : '');
     favBtn.innerHTML = heartIconSvg();
     
-    // The quantity controls overlay (hidden if qty is 0)
     const qtyWrap = document.createElement('div');
     qtyWrap.className = 'qty-controls';
     qtyWrap.style.display = currentQty > 0 ? 'flex' : 'none';
@@ -1140,15 +1142,15 @@
             favBtn.classList.add('active');
             qtyWrap.style.display = 'flex';
             qtyLabel.textContent = q;
-            favBtn.style.display = 'none'; // Ascundem inima, arătăm butoanele
+            favBtn.style.display = 'none'; 
         } else {
             favBtn.classList.remove('active');
             qtyWrap.style.display = 'none';
             favBtn.style.display = 'flex';
         }
         updateFavShortcut();
-        if(activeFilter === 'favorites' && q === 0) render(); // re-render if deleted from fav view
-        else updateBottomBar(); // just update totals otherwise
+        if(activeFilter === 'favorites' && q === 0) render(); 
+        else updateBottomBar(); 
     }
 
     favBtn.addEventListener('click', () => {
@@ -1222,7 +1224,6 @@
     return card;
   }
 
-  // --- LOGICĂ PENTRU CALCUL TOTAL ȘI AFIȘARE ---
   function getSelectedItemsAndTotal() {
       let filtered = allItems.filter(i => getQty(i) > 0);
       let sum = filtered.reduce((acc, item) => acc + (item.price * getQty(item)), 0);
@@ -1296,7 +1297,6 @@
     render();
   }
 
-  // --- LOGICĂ WHATSAPP ---
   const waOverlay = document.getElementById('waOverlay');
   const tableInput = document.getElementById('tableNumberInput');
   
@@ -1319,14 +1319,12 @@
       });
       msg += `\n*Total: ${total.toFixed(2)} €*`;
       
-      // Folosim numarul din config.json, sau ramane gol daca nu exista
       let phone = appConfig.whatsapp_number ? appConfig.whatsapp_number.replace(/\D/g,'') : '';
       window.open(`https://wa.me/${phone}?text=${encodeURIComponent(msg)}`, '_blank');
       
       waOverlay.classList.remove('open');
   });
 
-  // --- LOGICĂ MOD CHELNER ---
   const waiterScreen = document.getElementById('waiterScreen');
   const waiterList = document.getElementById('waiterList');
   const waiterTotalDisplay = document.getElementById('waiterTotalDisplay');
@@ -1349,7 +1347,6 @@
   document.getElementById('closeWaiterBtn').addEventListener('click', () => waiterScreen.classList.remove('active'));
   
   document.getElementById('clearWaiterBtn').addEventListener('click', () => {
-      // După ce comanda e preluată, golim coșul
       favoritesQty = {};
       saveFavorites();
       waiterScreen.classList.remove('active');
@@ -1357,8 +1354,6 @@
       updateFavShortcut();
   });
 
-
-  // Event Listeners Generale
   searchInput.addEventListener('input', render);
   langToggle.addEventListener('click', () => { currentLang = currentLang === 'es' ? 'en' : 'es'; saveLang(); refreshAll(); });
   favShortcut.addEventListener('click', () => { setActiveFilter('favorites'); document.getElementById('categoriesWrap').scrollIntoView({ behavior:'smooth', block:'start' }); });
@@ -1369,7 +1364,6 @@
   });
   scrollTopBtn.addEventListener('click', () => window.scrollTo({ top: 0, behavior: 'smooth' }));
 
-  // Inițializare (Meniu + Config)
   Promise.all([
     fetch('menu.json').then(r => r.ok ? r.json() : []),
     fetch('config.json').then(r => r.ok ? r.json() : { whatsapp_number: "" })
@@ -1386,14 +1380,12 @@
       emptyState.style.display = 'block';
   });
 
-  // Modal Legal
   const overlay = document.getElementById('legalOverlay');
   const openBtn = document.getElementById('openLegal');
   const closeBtn = document.getElementById('closeLegal');
   openBtn.addEventListener('click', () => overlay.classList.add('open'));
   closeBtn.addEventListener('click', () => overlay.classList.remove('open'));
   
-  // Închidere overlay-uri la apăsare afară sau Escape
   window.addEventListener('click', e => { 
       if(e.target === overlay) overlay.classList.remove('open'); 
       if(e.target === waOverlay) waOverlay.classList.remove('open');
@@ -1411,3 +1403,4 @@
 
 </body>
 </html>
+
