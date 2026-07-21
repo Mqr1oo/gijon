@@ -1,4 +1,4 @@
-
+```html
 <!DOCTYPE html>
 <html lang="es" id="htmlRoot">
 <head>
@@ -337,7 +337,7 @@
     border-left: 6px solid transparent;
   }
 
-  /* QUANTITY CONTROLS DIRECT PE FIECARE CARD (DREAPTA SUS PE IMAGINE) */
+  /* QUANTITY CONTROLS DIRECT PE FIECARE CARD (- VAL +) */
   .card-qty-controls {
     position: absolute;
     top: 12px; right: 12px;
@@ -504,7 +504,7 @@
   .global-fav-btn {
     left: 20px;
     background: var(--bg-card);
-    border: 2px solid var(--pink-main); /* Contur roz fix, elegant */
+    border: 2px solid var(--pink-main);
     padding: 0 16px 0 14px;
     gap: 8px;
     box-shadow: 0 6px 20px rgba(255, 42, 133, 0.25);
@@ -512,13 +512,12 @@
     font-family: 'Space Mono', monospace;
     font-size: 14px;
     font-weight: 700;
-    animation: heartPulse 2s infinite ease-in-out; /* Pulsare fină continuă */
+    animation: heartPulse 2s infinite ease-in-out;
   }
   .global-fav-btn svg { width: 22px; height: 22px; fill: none; stroke: var(--pink-main); stroke-width: 2; stroke-linecap: round; stroke-linejoin: round;}
   .global-fav-btn .fav-count { font-size: 14px; color: var(--pink-bright); }
   .global-fav-btn:active { transform: scale(0.92); animation: none; }
 
-  /* LIFT AMBELE BUTOANE CÂND APARE BARA CU TOTALUL */
   .scroll-top-btn.lift, .global-fav-btn.lift { bottom: 130px; }
 
   /* ---------- MODAL WELCOME (POP-UP) ---------- */
@@ -754,13 +753,9 @@
     <!-- ILUSTRAȚIE FIXĂ: Pahar de cocktail geometric alb cu roz -->
     <div class="cocktail-wrap" aria-hidden="true">
       <svg class="cocktail-svg" viewBox="0 0 200 200" fill="none" xmlns="http://www.w3.org/2000/svg">
-        <!-- Paiul -->
         <line x1="130" y1="20" x2="85" y2="120" stroke="#ffffff" stroke-width="4" stroke-linecap="round"/>
-        <!-- Lichidul roz din interior -->
         <polygon points="44,80 156,80 100,136" fill="#ff2a85" />
-        <!-- Paharul de cocktail -->
         <polygon points="25,60 175,60 100,140" stroke="#ffffff" stroke-width="5" stroke-linejoin="round"/>
-        <!-- Piciorul și baza -->
         <line x1="100" y1="140" x2="100" y2="185" stroke="#ffffff" stroke-width="5" stroke-linecap="round"/>
         <line x1="65" y1="185" x2="135" y2="185" stroke="#ffffff" stroke-width="5" stroke-linecap="round"/>
       </svg>
@@ -799,13 +794,11 @@
 </div>
 
 <!-- ================= BUTOANE FIXATE JOS ================= -->
-<!-- STANGA: INIMA PRINCIPALĂ CU CONTUR ROZ ȘI PULSARE -->
 <button class="global-fav-btn" id="favShortcut" type="button" aria-label="Ver selección">
   <svg viewBox="0 0 24 24"><path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/></svg>
   <span class="fav-count" id="favCount">0</span>
 </button>
 
-<!-- DREAPTA: SĂGEATĂ SUS -->
 <button class="scroll-top-btn" id="scrollTopBtn" aria-label="Volver arriba">
   <svg viewBox="0 0 24 24"><path d="M18 15l-6-6-6 6"/></svg>
 </button>
@@ -820,7 +813,6 @@
     <h2 id="txtWelcomeTitle">Fiera Bar</h2>
     <p id="txtWelcomeDesc">Por favor, selecciona tu idioma / Please select your language:</p>
 
-    <!-- SELECȚIE DE LIMBĂ ÎN MODAL CU STEAGURI -->
     <div class="welcome-langs">
       <button class="lang-btn active" data-lang="es"><span class="flag">🇪🇸</span> Español</button>
       <button class="lang-btn" data-lang="en"><span class="flag">🇬🇧</span> English</button>
@@ -888,6 +880,70 @@
   const scrollTopBtn = document.getElementById('scrollTopBtn');
   
   let appConfig = { whatsapp_number: "" }; 
+
+  // LIBRĂRIE DE REZERVĂ (FALLBACK) DACĂ MENU.JSON LIPSEȘTE SAU NU ARE DESTULE PRODUSE
+  const FALLBACK_MENU = [
+    {
+      "imageNumber": 1,
+      "name": "Fabada Asturiana",
+      "price": 16.50,
+      "description": "Guiso de fabes cocinado a fuego lento, con carnes ahumadas y un toque de pimentón.",
+      "ingredients": ["Fabes", "Chorizo", "Morcilla", "Panceta"],
+      "allergens": ["Sulfitos"],
+      "tags": ["principal", "tradicional", "sin gluten"],
+      "translations": { "en": { "name": "Fabada Asturiana", "description": "Slow-simmered bean stew with smoky cured meats.", "ingredients": ["White beans", "Chorizo", "Blood sausage", "Pork belly"], "allergens": ["Sulphites"] } }
+    },
+    {
+      "imageNumber": 2,
+      "name": "Cachopo de Cabrales",
+      "price": 19.00,
+      "description": "Dos filetes de ternera empanados y rellenos de queso Cabrales fundido y jamón serrano.",
+      "ingredients": ["Ternera", "Jamón serrano", "Queso Cabrales", "Huevo"],
+      "allergens": ["Gluten", "Lácteos", "Huevo"],
+      "tags": ["principal", "especialidad", "para compartir"],
+      "translations": { "en": { "name": "Cachopo de Cabrales", "description": "Breaded veal fillets stuffed with Cabrales blue cheese and serrano ham.", "ingredients": ["Veal", "Serrano ham", "Cabrales cheese", "Egg"], "allergens": ["Gluten", "Dairy", "Egg"] } }
+    },
+    {
+      "imageNumber": 3,
+      "name": "Mojito de Fresa",
+      "price": 8.50,
+      "description": "Ron blanco, lima fresca, hierbabuena, puré de fresa natural y soda.",
+      "ingredients": ["Ron", "Lima", "Hierbabuena", "Fresas", "Soda"],
+      "allergens": [],
+      "tags": ["coctel", "especialidad"],
+      "translations": { "en": { "name": "Strawberry Mojito", "description": "White rum, fresh lime, mint, and strawberry puree.", "ingredients": ["Rum", "Lime", "Mint", "Strawberries", "Soda"], "allergens": [] } }
+    },
+    {
+      "imageNumber": 4,
+      "name": "Tortos de Maíz con Picadillo",
+      "price": 9.50,
+      "description": "Tortas de maíz crujientes cubiertas de picadillo de cerdo especiado y huevo frito.",
+      "ingredients": ["Harina de maíz", "Picadillo de cerdo", "Huevo frito"],
+      "allergens": ["Huevo"],
+      "tags": ["entrante", "tradicional"],
+      "translations": { "en": { "name": "Corn Tortos with Picadillo", "description": "Crisp corn flatbreads topped with spiced minced pork and a fried egg.", "ingredients": ["Corn flour", "Minced pork", "Fried egg"], "allergens": ["Egg"] } }
+    },
+    {
+      "imageNumber": 5,
+      "name": "Arroz con Leche Quemado",
+      "price": 6.50,
+      "description": "Cremoso arroz con leche asturiano, frío, terminado con una capa de azúcar caramelizada.",
+      "ingredients": ["Arroz", "Leche", "Canela", "Azúcar"],
+      "allergens": ["Lácteos"],
+      "tags": ["postre", "tradicional"],
+      "translations": { "en": { "name": "Burnt Rice Pudding", "description": "Creamy Asturian rice pudding with caramelized sugar crust.", "ingredients": ["Rice", "Milk", "Cinnamon", "Sugar"], "allergens": ["Dairy"] } }
+    },
+    {
+      "imageNumber": 6,
+      "name": "Sidra Natural (Botella)",
+      "price": 7.00,
+      "description": "Sidra natural seca de un llagar local, escanciada desde lo alto.",
+      "ingredients": ["Zumo de manzana fermentado"],
+      "allergens": ["Sulfitos"],
+      "tags": ["bebida", "sidra", "tradicional"],
+      "translations": { "en": { "name": "Natural Cider (Bottle)", "description": "Dry natural cider poured in traditional style.", "ingredients": ["Fermented apple juice"], "allergens": ["Sulphites"] } }
+    }
+  ];
 
   const CATEGORIES = [
     { key:'entrante', es:'Entrantes', en:'Starters' },
@@ -1172,7 +1228,6 @@
     return (text.name + ' ' + text.description + ' ' + text.ingredients.join(' ')).toLowerCase().includes(query);
   }
 
-  /* CONSTRUIRE CARDURI CU CONTROL DIRECT - 1 + FĂRĂ INIMĂ INDIVIDUALĂ */
   function buildCard(item, index){
     const t = UI[currentLang];
     const text = itemText(item);
@@ -1201,7 +1256,6 @@
     });
     imgWrap.appendChild(img);
 
-    /* CONTROALE CANTITATE PE CARD (- VAL +) */
     const qtyWrap = document.createElement('div');
     let currentQty = getQty(item);
     qtyWrap.className = 'card-qty-controls' + (currentQty > 0 ? ' has-items' : '');
@@ -1464,10 +1518,11 @@
   scrollTopBtn.addEventListener('click', () => window.scrollTo({ top: 0, behavior: 'smooth' }));
 
   Promise.all([
-    fetch('menu.json').then(r => r.ok ? r.json() : []),
-    fetch('config.json').then(r => r.ok ? r.json() : { whatsapp_number: "" })
+    fetch('menu.json').then(r => r.ok ? r.json() : []).catch(() => []),
+    fetch('config.json').then(r => r.ok ? r.json() : { whatsapp_number: "" }).catch(() => ({ whatsapp_number: "" }))
   ]).then(([menuData, configData]) => {
-      allItems = menuData;
+      // Dacă menu.json este gol sau lipsă, folosim librăria de rezervă
+      allItems = (menuData && menuData.length > 0) ? menuData : FALLBACK_MENU;
       appConfig = configData;
       
       applyStaticText();
@@ -1485,8 +1540,10 @@
       }
   }).catch(err => {
       console.error(err);
-      emptyState.textContent = UI[currentLang].loadError;
-      emptyState.style.display = 'block';
+      allItems = FALLBACK_MENU;
+      applyStaticText();
+      renderTagFilters();
+      render();
   });
 
   const overlay = document.getElementById('legalOverlay');
