@@ -1,4 +1,4 @@
-
+```html
 <!DOCTYPE html>
 <html lang="es" id="htmlRoot">
 <head>
@@ -8,7 +8,7 @@
 <meta name="description" content="Menú digital de La Marea, cocina asturiana en Gijón.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600;9..144,700&family=Work+Sans:wght@400;500;600&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600;9..144,700&family=Work+Sans:wght@400;500;600;700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
 <style>
   :root{
     --navy:#0b2b3c;
@@ -284,7 +284,7 @@
   }
   
   /* ---------- CATEGORY SECTIONS / GRID ---------- */
-  .menu-section{ padding: 10px 0 120px; /* Padding mărit pt bara de total */ }
+  .menu-section{ padding: 10px 0 160px; /* Extins pentru noua bară de total */ }
   .category-section{ margin-top:38px; }
   .category-section h2{
     font-size:1.5rem;
@@ -377,6 +377,43 @@
   .fav-btn.active path{ fill:#f3ecdc; stroke:#f3ecdc; }
   .fav-btn.pop-anim svg { animation: heartPop 0.35s cubic-bezier(0.34, 1.56, 0.64, 1) forwards; }
 
+  /* QUANTITY CONTROLS PENTRU FAVORITE */
+  .qty-controls {
+    position: absolute;
+    bottom: 10px;
+    right: 10px;
+    display: flex;
+    align-items: center;
+    background: rgba(255, 255, 255, 0.95);
+    border-radius: 100px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.15);
+    overflow: hidden;
+    z-index: 10;
+  }
+  .qty-btn {
+    width: 32px;
+    height: 32px;
+    border: none;
+    background: transparent;
+    color: var(--navy);
+    font-size: 1.2rem;
+    font-weight: 700;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: background 0.2s;
+  }
+  .qty-btn:active { background: rgba(0,0,0,0.05); }
+  .qty-val {
+    width: 24px;
+    text-align: center;
+    font-family: 'Space Mono', monospace;
+    font-weight: 700;
+    font-size: 0.9rem;
+    color: var(--navy-deep);
+  }
+
   .card-body{ padding:18px; display:flex; flex-direction:column; gap:10px; flex:1; }
   .card-top{ display:flex; justify-content:space-between; align-items:baseline; gap:10px; }
   .card-top h3{ font-size:1.18rem; line-height:1.2; margin:0;}
@@ -399,50 +436,73 @@
 
   .empty-state{ text-align:center; padding:60px 20px; color:var(--ink-soft); font-family:'Space Mono', monospace; font-size:14px; }
 
-  /* ---------- TOTAL BAR (Sticky Bottom) ---------- */
+  /* ---------- TOTAL BAR (Sticky Bottom - Redesigned for multiple actions) ---------- */
   .total-bar {
     position: fixed;
     bottom: 0;
     left: 0;
     width: 100%;
-    background: rgba(255, 255, 255, 0.92);
+    background: rgba(255, 255, 255, 0.95);
     backdrop-filter: blur(12px);
     -webkit-backdrop-filter: blur(12px);
     border-top: 1px solid var(--paper-dim);
-    padding: 16px 20px;
-    padding-bottom: calc(16px + env(safe-area-inset-bottom));
+    padding: 16px 20px calc(16px + env(safe-area-inset-bottom));
     display: flex;
-    justify-content: space-between;
-    align-items: center;
+    flex-direction: column;
+    gap: 12px;
     z-index: 100;
     transform: translateY(120%);
     transition: transform 0.4s cubic-bezier(0.2, 0.8, 0.2, 1);
     box-shadow: 0 -4px 20px rgba(11,43,60,0.08);
   }
   .total-bar.show { transform: translateY(0); }
-  .total-info { display: flex; flex-direction: column; }
+  
+  .total-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 1px dashed var(--paper-dim);
+    padding-bottom: 8px;
+  }
   .total-label { font-size: 13px; color: var(--ink-soft); font-weight: 600; text-transform: uppercase; letter-spacing: 0.05em;}
   .total-amount { font-family: 'Space Mono', monospace; font-size: 1.4rem; font-weight: 700; color: var(--navy-deep); }
   
-  .btn-whatsapp {
-    background: #25D366; /* Culoare oficială WhatsApp */
-    color: white;
+  .action-buttons {
+    display: flex;
+    gap: 12px;
+  }
+  
+  .btn-action {
+    flex: 1;
     border: none;
-    padding: 12px 20px;
-    border-radius: 100px;
+    padding: 12px;
+    border-radius: var(--radius-md);
     font-family: 'Work Sans', sans-serif;
     font-weight: 600;
-    font-size: 14.5px;
+    font-size: 14px;
     display: flex;
     align-items: center;
+    justify-content: center;
     gap: 8px;
     cursor: pointer;
-    box-shadow: 0 4px 12px rgba(37, 211, 102, 0.3);
-    transition: transform 0.2s, background 0.2s;
+    transition: transform 0.2s, background 0.2s, opacity 0.2s;
     -webkit-tap-highlight-color: transparent;
   }
-  .btn-whatsapp:active { transform: scale(0.96); background: #20bd5a; }
-  .btn-whatsapp svg { width: 20px; height: 20px; fill: currentColor; }
+  .btn-action:active { transform: scale(0.96); }
+  
+  .btn-whatsapp {
+    background: #25D366;
+    color: white;
+    box-shadow: 0 4px 12px rgba(37, 211, 102, 0.25);
+  }
+  .btn-whatsapp svg { width: 18px; height: 18px; fill: currentColor; }
+  
+  .btn-waiter {
+    background: var(--navy);
+    color: white;
+    box-shadow: 0 4px 12px rgba(11,43,60,0.2);
+  }
+  .btn-waiter svg { width: 18px; height: 18px; stroke: currentColor; stroke-width: 2; fill: none; stroke-linecap: round; stroke-linejoin: round;}
 
   /* ---------- SCROLL TO TOP BTN ---------- */
   .scroll-top-btn {
@@ -468,7 +528,7 @@
     -webkit-tap-highlight-color: transparent;
   }
   .scroll-top-btn.show { opacity: 1; pointer-events: auto; transform: translateY(0); }
-  .scroll-top-btn.lift { bottom: 90px; /* Lift up if total bar is showing */ }
+  .scroll-top-btn.lift { bottom: 130px; /* Ridicat deasupra barei extinse de total */ }
   .scroll-top-btn svg { width: 24px; height: 24px; stroke: currentColor; stroke-width: 2.5; fill: none; stroke-linecap: round; stroke-linejoin: round;}
   .scroll-top-btn:active { background: var(--navy-deep); transform: scale(0.92); }
 
@@ -479,13 +539,110 @@
   .footer-links{ display:flex; gap:20px; flex-wrap:wrap; align-items:center; }
   .footer-links button{ background:none; border:none; color:#a9c0ba; font-family:'Work Sans', sans-serif; font-size:13.5px; cursor:pointer; text-decoration:underline; text-underline-offset:3px; padding:0; }
 
-  /* ---------- MODAL ---------- */
-  .modal-overlay{ position:fixed; inset:0; background:rgba(8,31,44,0.6); display:none; align-items:center; justify-content:center; padding:20px; z-index:150; }
+  /* ---------- MODALS ---------- */
+  .modal-overlay{ position:fixed; inset:0; background:rgba(8,31,44,0.6); display:none; align-items:center; justify-content:center; padding:20px; z-index:150; backdrop-filter: blur(4px); -webkit-backdrop-filter: blur(4px);}
   .modal-overlay.open{ display:flex; }
-  .modal{ background:var(--paper); max-width:560px; width:100%; max-height:80vh; overflow-y:auto; border-radius:var(--radius-lg); padding:30px; position:relative; }
+  .modal{ background:var(--paper); max-width:400px; width:100%; max-height:90vh; overflow-y:auto; border-radius:var(--radius-lg); padding:30px; position:relative; box-shadow: 0 10px 40px rgba(0,0,0,0.2);}
   .modal h2{ font-size:1.4rem; margin-bottom:14px; }
-  .modal p{ font-size:14px; color:var(--ink-soft); margin:0 0 12px; }
+  .modal p{ font-size:14px; color:var(--ink-soft); margin:0 0 16px; }
   .modal-close{ position:absolute; top:14px; right:14px; background:none; border:none; font-size:20px; cursor:pointer; color:var(--ink-soft); line-height:1; padding:8px; }
+  
+  .input-table {
+    width: 100%;
+    padding: 14px;
+    font-size: 1.2rem;
+    text-align: center;
+    border: 2px solid var(--paper-dim);
+    border-radius: var(--radius-md);
+    margin-bottom: 20px;
+    font-family: 'Space Mono', monospace;
+    font-weight: 700;
+    color: var(--navy);
+  }
+  .input-table:focus { outline: none; border-color: var(--foam-dim); }
+  
+  .btn-submit {
+    width: 100%;
+    background: #25D366;
+    color: white;
+    border: none;
+    padding: 14px;
+    border-radius: var(--radius-md);
+    font-weight: 600;
+    font-size: 1.1rem;
+    font-family: 'Work Sans', sans-serif;
+    cursor: pointer;
+  }
+
+  /* ---------- WAITER MODE (Fullscreen display) ---------- */
+  .waiter-mode {
+    position: fixed;
+    inset: 0;
+    background: #fff;
+    z-index: 200;
+    display: none;
+    flex-direction: column;
+    padding: 40px 20px 100px;
+    overflow-y: auto;
+  }
+  .waiter-mode.active { display: flex; }
+  .waiter-header {
+    text-align: center;
+    margin-bottom: 30px;
+    border-bottom: 3px solid var(--navy);
+    padding-bottom: 20px;
+  }
+  .waiter-header h2 { font-size: 2rem; color: var(--navy); }
+  .waiter-list { list-style: none; padding: 0; margin: 0 0 30px; }
+  .waiter-list li {
+    display: flex;
+    justify-content: space-between;
+    font-size: 1.4rem;
+    font-weight: 600;
+    padding: 16px 0;
+    border-bottom: 1px solid #eee;
+    color: var(--ink);
+  }
+  .waiter-list .qty-badge {
+    background: var(--gold);
+    color: white;
+    padding: 4px 10px;
+    border-radius: 8px;
+    margin-right: 12px;
+  }
+  .waiter-total { font-size: 1.8rem; font-weight: 700; text-align: right; color: var(--navy-deep); }
+  
+  .waiter-actions {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    background: #fff;
+    padding: 20px;
+    box-shadow: 0 -4px 20px rgba(0,0,0,0.1);
+    display: flex;
+    gap: 16px;
+  }
+  .btn-waiter-done {
+    flex: 1;
+    background: var(--navy);
+    color: white;
+    border: none;
+    padding: 16px;
+    border-radius: var(--radius-md);
+    font-size: 1.2rem;
+    font-weight: 700;
+    font-family: 'Work Sans', sans-serif;
+  }
+  .btn-waiter-back {
+    background: transparent;
+    color: var(--ink-soft);
+    border: 2px solid var(--paper-dim);
+    padding: 16px;
+    border-radius: var(--radius-md);
+    font-weight: 600;
+    font-family: 'Work Sans', sans-serif;
+  }
 
   /* --- MEDIA QUERIES --- */
   @media (max-width:640px){
@@ -498,6 +655,9 @@
     .tag-filters { margin: 0 -20px; padding-left: 20px; padding-right: 20px; }
     .footer-inner{ flex-direction:column; align-items:flex-start; }
     .grid{ grid-template-columns:1fr; }
+    
+    .action-buttons { flex-direction: column; } /* Stivuim butoanele pe telefoane mici */
+    .scroll-top-btn.lift { bottom: 180px; }
   }
   @media (min-width:641px){
     .controls { flex-direction: row; align-items: center; justify-content: space-between; }
@@ -511,7 +671,7 @@
 
 <header class="hero">
   <div class="top-actions">
-    <button class="fav-shortcut" id="favShortcut" type="button" aria-label="Ver favoritos">
+    <button class="fav-shortcut" id="favShortcut" type="button" aria-label="Ver selección">
       <svg viewBox="0 0 24 24"><path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/></svg>
       <span class="fav-count" id="favCount">0</span>
     </button>
@@ -526,6 +686,7 @@
         <div><span id="txtHoursLabel">Horario</span><span id="txtHoursValue">13:00 &ndash; 23:30</span></div>
       </div>
     </div>
+    <!-- Decorativ (Valuri) -->
     <div class="sea-wrap" aria-hidden="true">
       <svg class="sea-svg" viewBox="0 0 300 220" fill="none">
         <path class="gull g1" d="M60 40 q6 -8 12 0 q6 -8 12 0" stroke="#8fd1c2" stroke-width="2" stroke-linecap="round"/>
@@ -564,19 +725,24 @@
   <div class="empty-state" id="emptyState" style="display:none;"></div>
 </main>
 
-<!-- BARA DE TOTAL FIXĂ -->
+<!-- BARA DE TOTAL FIXĂ CU 2 ACȚIUNI -->
 <div class="total-bar" id="totalBar">
-  <div class="total-info">
-    <span class="total-label" id="txtTotalLabel">Total:</span>
+  <div class="total-header">
+    <span class="total-label" id="txtTotalLabel">Total Selección:</span>
     <span class="total-amount" id="totalAmount">0.00 €</span>
   </div>
-  <button class="btn-whatsapp" id="shareOrderBtn">
-    <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
-    <span id="txtShareOrder">Pedir</span>
-  </button>
+  <div class="action-buttons">
+    <button class="btn-action btn-whatsapp" id="btnOpenWhatsAppModal">
+      <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+      <span id="txtBtnWhatsApp">Pedir WhatsApp</span>
+    </button>
+    <button class="btn-action btn-waiter" id="btnOpenWaiterMode">
+      <svg viewBox="0 0 24 24"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path></svg>
+      <span id="txtBtnWaiter">Mostrar al Camarero</span>
+    </button>
+  </div>
 </div>
 
-<!-- BUTON SCROLL TO TOP -->
 <button class="scroll-top-btn" id="scrollTopBtn" aria-label="Volver arriba">
   <svg viewBox="0 0 24 24"><path d="M18 15l-6-6-6 6"/></svg>
 </button>
@@ -591,6 +757,7 @@
   </div>
 </footer>
 
+<!-- MODAL LEGAL -->
 <div class="modal-overlay" id="legalOverlay">
   <div class="modal" role="dialog" aria-modal="true" aria-labelledby="legalTitle">
     <button class="modal-close" id="closeLegal" aria-label="Cerrar">&times;</button>
@@ -598,6 +765,31 @@
     <p id="legalP1"></p>
     <p id="legalP2"></p>
     <p id="legalP3"></p>
+  </div>
+</div>
+
+<!-- MODAL WHATSAPP PENTRU NUMĂR MASĂ -->
+<div class="modal-overlay" id="waOverlay">
+  <div class="modal" role="dialog" aria-modal="true">
+    <button class="modal-close" id="closeWaModal" aria-label="Cerrar">&times;</button>
+    <h2 id="txtWaModalTitle">Número de Mesa</h2>
+    <p id="txtWaModalDesc">Por favor, indica tu número de mesa para que podamos llevarte el pedido.</p>
+    <input type="number" id="tableNumberInput" class="input-table" placeholder="Ej: 4">
+    <button class="btn-submit" id="sendWaBtn">Enviar por WhatsApp</button>
+  </div>
+</div>
+
+<!-- ECRAN FULLSCREEN MOD CHELNER -->
+<div class="waiter-mode" id="waiterScreen">
+  <div class="waiter-header">
+    <h2 id="txtWaiterTitle">Tu Selección</h2>
+  </div>
+  <ul class="waiter-list" id="waiterList"></ul>
+  <div class="waiter-total" id="waiterTotalDisplay">Total: 0.00 €</div>
+  
+  <div class="waiter-actions">
+    <button class="btn-waiter-back" id="closeWaiterBtn">Volver</button>
+    <button class="btn-waiter-done" id="clearWaiterBtn">¡Pedido Tomado!</button>
   </div>
 </div>
 
@@ -613,8 +805,9 @@
   const htmlRoot = document.getElementById('htmlRoot');
   const totalBar = document.getElementById('totalBar');
   const totalAmount = document.getElementById('totalAmount');
-  const shareOrderBtn = document.getElementById('shareOrderBtn');
   const scrollTopBtn = document.getElementById('scrollTopBtn');
+  
+  let appConfig = { whatsapp_number: "" }; // Setat inițial gol, va fi populat din config.json
 
   const CATEGORIES = [
     { key:'entrante', es:'Entrantes', en:'Starters' },
@@ -661,17 +854,22 @@
       legalLinkText: 'Aviso legal y privacidad',
       footerCopy: '© 2026 La Marea, Gijón',
       modalTitle: 'Aviso legal y privacidad',
-      modalP1: 'Los precios, ingredientes y disponibilidad de los platos mostrados en este menú pueden variar sin previo aviso. Recomendamos confirmar alérgenos e ingredientes directamente con el personal del restaurante antes de realizar un pedido.',
-      modalP2: 'Esta web no utiliza cookies de seguimiento ni herramientas de analítica.',
-      modalP3: 'El uso de este menú digital implica la aceptación de que la información aquí mostrada tiene carácter orientativo.',
-      favAdd: 'Añadir a favoritos',
-      favRemove: 'Quitar de favoritos',
-      favShortcutLabel: 'Ver favoritos',
+      modalP1: 'Los precios, ingredientes y disponibilidad de los platos mostrados en este menú pueden variar.',
+      modalP2: 'Tus favoritos se guardan localmente en tu dispositivo.',
+      modalP3: 'La información mostrada tiene carácter orientativo.',
+      favShortcutLabel: 'Mi Selección',
       toggleLabel: 'EN',
-      totalLabel: 'Total:',
-      shareOrder: 'Pedir',
+      totalLabel: 'Total Selección:',
+      btnWhatsApp: 'Pedir WhatsApp',
+      btnWaiter: 'Mostrar al Camarero',
       ribbonSpecial: 'Especialidad',
-      whatsappIntro: '¡Hola! Me gustaría pedir lo siguiente:'
+      waModalTitle: 'Número de Mesa',
+      waModalDesc: 'Por favor, indica tu número de mesa para enviar el pedido al restaurante.',
+      sendWaBtn: 'Enviar',
+      waiterTitle: 'Selección de la Mesa',
+      closeWaiterBtn: 'Volver al Menú',
+      clearWaiterBtn: '¡Pedido Tomado!',
+      whatsappIntro: '¡Hola! Somos la mesa {mesa}. Nos gustaría pedir:'
     },
     en: {
       eyebrow: 'Gijón · Digital menu',
@@ -689,36 +887,43 @@
       legalLinkText: 'Legal notice & privacy',
       footerCopy: '© 2026 La Marea, Gijón',
       modalTitle: 'Legal notice & privacy',
-      modalP1: 'Prices, ingredients and availability of the dishes shown in this menu may change without notice.',
-      modalP2: 'This site uses no tracking cookies and no analytics tools.',
-      modalP3: 'Using this digital menu implies acceptance that the information shown here is for guidance only.',
-      favAdd: 'Add to favorites',
-      favRemove: 'Remove from favorites',
-      favShortcutLabel: 'View favorites',
+      modalP1: 'Prices, ingredients and availability of dishes may change.',
+      modalP2: 'Your favorites are saved locally on your device.',
+      modalP3: 'The information shown is for guidance only.',
+      favShortcutLabel: 'My Selection',
       toggleLabel: 'ES',
-      totalLabel: 'Total:',
-      shareOrder: 'Order',
+      totalLabel: 'Total Selection:',
+      btnWhatsApp: 'WhatsApp Order',
+      btnWaiter: 'Show to Waiter',
       ribbonSpecial: 'Signature',
-      whatsappIntro: 'Hi! I would like to order the following:'
+      waModalTitle: 'Table Number',
+      waModalDesc: 'Please enter your table number to send the order to the restaurant.',
+      sendWaBtn: 'Send Order',
+      waiterTitle: 'Table Selection',
+      closeWaiterBtn: 'Back to Menu',
+      clearWaiterBtn: 'Order Taken!',
+      whatsappIntro: 'Hi! We are table {mesa}. We would like to order:'
     }
   };
 
-  const FAVORITES_KEY = 'laMarea:favorites';
+  const FAVORITES_KEY = 'laMarea:favoritesQty';
   const LANG_KEY = 'laMarea:lang';
 
   let allItems = [];
   let activeFilter = 'all';
-  let favorites = loadFavorites();
+  
+  // În loc de Set(), acum folosim un Obiect pentru a stoca cantitatea: { "id_produs": cantitate }
+  let favoritesQty = loadFavorites();
   let currentLang = loadLang();
 
   function loadFavorites(){
     try{
       const raw = window.localStorage.getItem(FAVORITES_KEY);
-      return new Set(raw ? JSON.parse(raw) : []);
-    }catch(e){ return new Set(); }
+      return raw ? JSON.parse(raw) : {};
+    }catch(e){ return {}; }
   }
   function saveFavorites(){
-    try{ window.localStorage.setItem(FAVORITES_KEY, JSON.stringify(Array.from(favorites))); }
+    try{ window.localStorage.setItem(FAVORITES_KEY, JSON.stringify(favoritesQty)); }
     catch(e){}
   }
   function loadLang(){
@@ -729,15 +934,30 @@
     try{ window.localStorage.setItem(LANG_KEY, currentLang); }catch(e){}
   }
 
-  function updateFavShortcut(){
-    favCountEl.textContent = String(favorites.size);
-    favShortcut.classList.toggle('has-favs', favorites.size > 0);
+  function getFavCount() {
+    let count = 0;
+    for(let id in favoritesQty) count += favoritesQty[id];
+    return count;
   }
 
-  function isFavorite(item){ return favorites.has(String(item.imageNumber)); }
-  function toggleFavorite(item){
-    const id = String(item.imageNumber);
-    if(favorites.has(id)) favorites.delete(id); else favorites.add(id);
+  function updateFavShortcut(){
+    const count = getFavCount();
+    favCountEl.textContent = count;
+    favShortcut.classList.toggle('has-favs', count > 0);
+  }
+
+  function getQty(item) { return favoritesQty[item.imageNumber] || 0; }
+  
+  function updateQty(item, change) {
+    const id = item.imageNumber;
+    let current = favoritesQty[id] || 0;
+    current += change;
+    
+    if(current <= 0) {
+      delete favoritesQty[id];
+    } else {
+      favoritesQty[id] = current;
+    }
     saveFavorites();
   }
 
@@ -784,12 +1004,27 @@
     emptyState.textContent = t.emptyState;
     document.getElementById('openLegal').textContent = t.legalLinkText;
     document.getElementById('txtFooterCopy').textContent = t.footerCopy;
+    
+    // Modals
     document.getElementById('legalTitle').textContent = t.modalTitle;
     document.getElementById('legalP1').textContent = t.modalP1;
     document.getElementById('legalP2').textContent = t.modalP2;
     document.getElementById('legalP3').textContent = t.modalP3;
+    
+    // Bottom Bar
     document.getElementById('txtTotalLabel').textContent = t.totalLabel;
-    document.getElementById('txtShareOrder').textContent = t.shareOrder;
+    document.getElementById('txtBtnWhatsApp').textContent = t.btnWhatsApp;
+    document.getElementById('txtBtnWaiter').textContent = t.btnWaiter;
+    
+    // WA Modal
+    document.getElementById('txtWaModalTitle').textContent = t.waModalTitle;
+    document.getElementById('txtWaModalDesc').textContent = t.waModalDesc;
+    document.getElementById('sendWaBtn').textContent = t.sendWaBtn;
+    
+    // Waiter Screen
+    document.getElementById('txtWaiterTitle').textContent = t.waiterTitle;
+    document.getElementById('closeWaiterBtn').textContent = t.closeWaiterBtn;
+    document.getElementById('clearWaiterBtn').textContent = t.clearWaiterBtn;
   }
 
   function renderTagFilters(){
@@ -841,19 +1076,6 @@
     return '<svg viewBox="0 0 24 24"><path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/></svg>';
   }
 
-  function updateWhatsAppLink(favItems, totalAmountVal) {
-    const t = UI[currentLang];
-    let msg = t.whatsappIntro + "\n\n";
-    favItems.forEach(item => {
-      msg += `- ${itemText(item).name} (${item.price.toFixed(2)} €)\n`;
-    });
-    msg += `\n*Total: ${totalAmountVal.toFixed(2)} €*`;
-    
-    shareOrderBtn.onclick = () => {
-      window.open(`https://wa.me/?text=${encodeURIComponent(msg)}`, '_blank');
-    };
-  }
-
   function buildCard(item, index){
     const t = UI[currentLang];
     const text = itemText(item);
@@ -864,7 +1086,6 @@
     const imgWrap = document.createElement('div');
     imgWrap.className = 'card-img-wrap';
 
-    // Panglică pentru „Especialidad”
     if(item.tags && item.tags.includes('especialidad')){
       const ribbon = document.createElement('div');
       ribbon.className = 'ribbon';
@@ -883,30 +1104,68 @@
     });
     imgWrap.appendChild(img);
 
+    // Initial heart button (adds 1 to favorites)
     const favBtn = document.createElement('button');
     favBtn.type = 'button';
-    favBtn.className = 'fav-btn' + (isFavorite(item) ? ' active' : '');
-    favBtn.setAttribute('aria-pressed', String(isFavorite(item)));
-    favBtn.setAttribute('aria-label', isFavorite(item) ? t.favRemove : t.favAdd);
+    
+    // We only show the initial heart if quantity is 0
+    let currentQty = getQty(item);
+    favBtn.className = 'fav-btn' + (currentQty > 0 ? ' active' : '');
     favBtn.innerHTML = heartIconSvg();
     
+    // The quantity controls overlay (hidden if qty is 0)
+    const qtyWrap = document.createElement('div');
+    qtyWrap.className = 'qty-controls';
+    qtyWrap.style.display = currentQty > 0 ? 'flex' : 'none';
+    
+    const minusBtn = document.createElement('button');
+    minusBtn.className = 'qty-btn';
+    minusBtn.textContent = '−';
+    
+    const qtyLabel = document.createElement('span');
+    qtyLabel.className = 'qty-val';
+    qtyLabel.textContent = currentQty;
+    
+    const plusBtn = document.createElement('button');
+    plusBtn.className = 'qty-btn';
+    plusBtn.textContent = '+';
+    
+    qtyWrap.appendChild(minusBtn);
+    qtyWrap.appendChild(qtyLabel);
+    qtyWrap.appendChild(plusBtn);
+    
+    function refreshCardUI() {
+        let q = getQty(item);
+        if(q > 0) {
+            favBtn.classList.add('active');
+            qtyWrap.style.display = 'flex';
+            qtyLabel.textContent = q;
+            favBtn.style.display = 'none'; // Ascundem inima, arătăm butoanele
+        } else {
+            favBtn.classList.remove('active');
+            qtyWrap.style.display = 'none';
+            favBtn.style.display = 'flex';
+        }
+        updateFavShortcut();
+        if(activeFilter === 'favorites' && q === 0) render(); // re-render if deleted from fav view
+        else updateBottomBar(); // just update totals otherwise
+    }
+
     favBtn.addEventListener('click', () => {
       favBtn.classList.remove('pop-anim');
       void favBtn.offsetWidth; 
       favBtn.classList.add('pop-anim');
       
-      toggleFavorite(item);
-      const isFavNow = isFavorite(item);
-      favBtn.classList.toggle('active', isFavNow);
-      favBtn.setAttribute('aria-pressed', String(isFavNow));
-      favBtn.setAttribute('aria-label', isFavNow ? t.favRemove : t.favAdd);
-      
-      updateFavShortcut();
-      if(activeFilter === 'favorites') render(); // Re-render if removing from favs view
-      
+      updateQty(item, 1);
+      refreshCardUI();
       setTimeout(() => favBtn.classList.remove('pop-anim'), 400);
     });
+    
+    plusBtn.addEventListener('click', () => { updateQty(item, 1); refreshCardUI(); });
+    minusBtn.addEventListener('click', () => { updateQty(item, -1); refreshCardUI(); });
+
     imgWrap.appendChild(favBtn);
+    imgWrap.appendChild(qtyWrap);
     card.appendChild(imgWrap);
 
     const body = document.createElement('div');
@@ -932,20 +1191,6 @@
     ingredients.className = 'ingredients';
     ingredients.innerHTML = `<b>${t.ingredientsLabel}</b> ${text.ingredients.join(', ')}`;
     body.appendChild(ingredients);
-
-    if(item.tags && item.tags.length){
-      const tagRow = document.createElement('div');
-      tagRow.className = 'tag-row';
-      item.tags.forEach(tg => {
-        if(tg !== 'especialidad') { // Nu mai punem bulină pt specialitate pt ca are panglică
-          const pill = document.createElement('span');
-          pill.className = 'tag-pill';
-          pill.textContent = tagLabel(tg);
-          tagRow.appendChild(pill);
-        }
-      });
-      body.appendChild(tagRow);
-    }
 
     const allergenWrap = document.createElement('div');
     allergenWrap.className = 'allergens-wrap';
@@ -977,29 +1222,37 @@
     return card;
   }
 
-  function render(){
-    const query = searchInput.value.trim().toLowerCase();
-    let filtered = allItems.filter(item => matchesSearch(item, query));
+  // --- LOGICĂ PENTRU CALCUL TOTAL ȘI AFIȘARE ---
+  function getSelectedItemsAndTotal() {
+      let filtered = allItems.filter(i => getQty(i) > 0);
+      let sum = filtered.reduce((acc, item) => acc + (item.price * getQty(item)), 0);
+      return { items: filtered, total: sum };
+  }
 
-    // Handle Favorites & Total Bar logic
-    if(activeFilter === 'favorites'){
-      filtered = filtered.filter(isFavorite);
+  function updateBottomBar() {
+      const { items, total } = getSelectedItemsAndTotal();
       
-      if(filtered.length > 0) {
-        let sum = filtered.reduce((acc, item) => acc + item.price, 0);
-        totalAmount.textContent = `${sum.toFixed(2)} €`;
-        updateWhatsAppLink(filtered, sum);
+      if(activeFilter === 'favorites' && items.length > 0) {
+        totalAmount.textContent = `${total.toFixed(2)} €`;
         totalBar.classList.add('show');
-        scrollTopBtn.classList.add('lift'); // Ridică butonul de scroll peste bară
+        scrollTopBtn.classList.add('lift');
       } else {
         totalBar.classList.remove('show');
         scrollTopBtn.classList.remove('lift');
       }
+  }
+
+  function render(){
+    const query = searchInput.value.trim().toLowerCase();
+    let filtered = allItems.filter(item => matchesSearch(item, query));
+
+    if(activeFilter === 'favorites'){
+      filtered = filtered.filter(i => getQty(i) > 0);
     } else {
       filtered = filtered.filter(item => activeFilter === 'all' ? true : categoryOf(item) === activeFilter);
-      totalBar.classList.remove('show');
-      scrollTopBtn.classList.remove('lift');
     }
+    
+    updateBottomBar();
 
     categoriesWrap.innerHTML = '';
 
@@ -1043,62 +1296,114 @@
     render();
   }
 
-  // Event Listeners
+  // --- LOGICĂ WHATSAPP ---
+  const waOverlay = document.getElementById('waOverlay');
+  const tableInput = document.getElementById('tableNumberInput');
+  
+  document.getElementById('btnOpenWhatsAppModal').addEventListener('click', () => {
+    waOverlay.classList.add('open');
+    tableInput.focus();
+  });
+  
+  document.getElementById('closeWaModal').addEventListener('click', () => waOverlay.classList.remove('open'));
+  
+  document.getElementById('sendWaBtn').addEventListener('click', () => {
+      const tableNr = tableInput.value.trim() || 'Sin Especificar';
+      const t = UI[currentLang];
+      const { items, total } = getSelectedItemsAndTotal();
+      
+      let msg = t.whatsappIntro.replace('{mesa}', tableNr) + "\n\n";
+      items.forEach(item => {
+          let qty = getQty(item);
+          msg += `▪ ${qty}x ${itemText(item).name} (${(item.price * qty).toFixed(2)} €)\n`;
+      });
+      msg += `\n*Total: ${total.toFixed(2)} €*`;
+      
+      // Folosim numarul din config.json, sau ramane gol daca nu exista
+      let phone = appConfig.whatsapp_number ? appConfig.whatsapp_number.replace(/\D/g,'') : '';
+      window.open(`https://wa.me/${phone}?text=${encodeURIComponent(msg)}`, '_blank');
+      
+      waOverlay.classList.remove('open');
+  });
+
+  // --- LOGICĂ MOD CHELNER ---
+  const waiterScreen = document.getElementById('waiterScreen');
+  const waiterList = document.getElementById('waiterList');
+  const waiterTotalDisplay = document.getElementById('waiterTotalDisplay');
+
+  document.getElementById('btnOpenWaiterMode').addEventListener('click', () => {
+      const { items, total } = getSelectedItemsAndTotal();
+      waiterList.innerHTML = '';
+      
+      items.forEach(item => {
+          let qty = getQty(item);
+          let li = document.createElement('li');
+          li.innerHTML = `<div><span class="qty-badge">${qty}x</span> ${itemText(item).name}</div> <span>${(item.price * qty).toFixed(2)} €</span>`;
+          waiterList.appendChild(li);
+      });
+      
+      waiterTotalDisplay.textContent = `Total: ${total.toFixed(2)} €`;
+      waiterScreen.classList.add('active');
+  });
+
+  document.getElementById('closeWaiterBtn').addEventListener('click', () => waiterScreen.classList.remove('active'));
+  
+  document.getElementById('clearWaiterBtn').addEventListener('click', () => {
+      // După ce comanda e preluată, golim coșul
+      favoritesQty = {};
+      saveFavorites();
+      waiterScreen.classList.remove('active');
+      render();
+      updateFavShortcut();
+  });
+
+
+  // Event Listeners Generale
   searchInput.addEventListener('input', render);
+  langToggle.addEventListener('click', () => { currentLang = currentLang === 'es' ? 'en' : 'es'; saveLang(); refreshAll(); });
+  favShortcut.addEventListener('click', () => { setActiveFilter('favorites'); document.getElementById('categoriesWrap').scrollIntoView({ behavior:'smooth', block:'start' }); });
 
-  langToggle.addEventListener('click', () => {
-    currentLang = currentLang === 'es' ? 'en' : 'es';
-    saveLang();
-    refreshAll();
-  });
-
-  favShortcut.addEventListener('click', () => {
-    setActiveFilter('favorites');
-    document.getElementById('categoriesWrap').scrollIntoView({ behavior:'smooth', block:'start' });
-  });
-
-  // Scroll to Top Logic
   window.addEventListener('scroll', () => {
-    if (window.scrollY > 300) {
-      scrollTopBtn.classList.add('show');
-    } else {
-      scrollTopBtn.classList.remove('show');
-    }
+    if (window.scrollY > 300) scrollTopBtn.classList.add('show');
+    else scrollTopBtn.classList.remove('show');
   });
+  scrollTopBtn.addEventListener('click', () => window.scrollTo({ top: 0, behavior: 'smooth' }));
 
-  scrollTopBtn.addEventListener('click', () => {
-    window.scrollTo({ top: 0, behavior: 'smooth' });
-  });
-
-  fetch('menu.json')
-    .then(res => {
-      if(!res.ok) throw new Error('menu.json not found');
-      return res.json();
-    })
-    .then(data => {
-      allItems = data;
+  // Inițializare (Meniu + Config)
+  Promise.all([
+    fetch('menu.json').then(r => r.ok ? r.json() : []),
+    fetch('config.json').then(r => r.ok ? r.json() : { whatsapp_number: "" })
+  ]).then(([menuData, configData]) => {
+      allItems = menuData;
+      appConfig = configData;
+      
       applyStaticText();
       renderTagFilters();
       render();
-    })
-    .catch(err => {
-      categoriesWrap.innerHTML = '';
+  }).catch(err => {
+      console.error(err);
       emptyState.textContent = UI[currentLang].loadError;
       emptyState.style.display = 'block';
-      console.error(err);
-    });
+  });
 
   // Modal Legal
   const overlay = document.getElementById('legalOverlay');
   const openBtn = document.getElementById('openLegal');
   const closeBtn = document.getElementById('closeLegal');
-
-  function openModal(){ overlay.classList.add('open'); closeBtn.focus(); }
-  function closeModal(){ overlay.classList.remove('open'); openBtn.focus(); }
-  openBtn.addEventListener('click', openModal);
-  closeBtn.addEventListener('click', closeModal);
-  overlay.addEventListener('click', e => { if(e.target === overlay) closeModal(); });
-  document.addEventListener('keydown', e => { if(e.key === 'Escape' && overlay.classList.contains('open')) closeModal(); });
+  openBtn.addEventListener('click', () => overlay.classList.add('open'));
+  closeBtn.addEventListener('click', () => overlay.classList.remove('open'));
+  
+  // Închidere overlay-uri la apăsare afară sau Escape
+  window.addEventListener('click', e => { 
+      if(e.target === overlay) overlay.classList.remove('open'); 
+      if(e.target === waOverlay) waOverlay.classList.remove('open');
+  });
+  document.addEventListener('keydown', e => { 
+      if(e.key === 'Escape') {
+          overlay.classList.remove('open');
+          waOverlay.classList.remove('open');
+      }
+  });
 
   applyStaticText();
 })();
@@ -1106,4 +1411,3 @@
 
 </body>
 </html>
-
