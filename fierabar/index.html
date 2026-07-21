@@ -1,4 +1,4 @@
-
+```html
 <!DOCTYPE html>
 <html lang="es" id="htmlRoot">
 <head>
@@ -101,7 +101,7 @@
     align-items:center;
     gap:8px;
   }
-  .lang-toggle, .fav-shortcut{
+  .lang-toggle{
     font-family:'Space Mono', monospace;
     font-size:12px;
     letter-spacing:.04em;
@@ -115,20 +115,13 @@
     color:var(--ink);
     cursor:pointer;
     transition:background .2s, transform .15s, border-color .2s;
-  }
-  .lang-toggle:hover, .fav-shortcut:hover{ background:var(--bg-panel); border-color: var(--pink-main); }
-  .lang-toggle:active, .fav-shortcut:active{ transform:scale(0.92); }
-  .fav-shortcut{
     display:flex;
     align-items:center;
     gap:6px;
-    padding:8px 12px 8px 10px;
   }
-  .fav-shortcut svg{ width:18px; height:18px; flex-shrink:0; }
-  .fav-shortcut path{ fill:none; stroke:var(--ink); stroke-width:2; transition:fill .2s, stroke .2s; stroke-linejoin:round; stroke-linecap:round;}
-  .fav-shortcut.has-favs{ border-color:var(--pink-main); background: rgba(255, 42, 133, 0.15);}
-  .fav-shortcut.has-favs path{ fill:var(--pink-main); stroke:var(--pink-main); }
-  .fav-count{ min-width:14px; text-align:left; font-weight: 600;}
+  .lang-toggle:hover{ background:var(--bg-panel); border-color: var(--pink-main); }
+  .lang-toggle:active{ transform:scale(0.92); }
+  
   .hero-inner{
     display:flex;
     flex-wrap:wrap;
@@ -182,7 +175,7 @@
   }
   .hero-meta span{ display:block; color:var(--ink-soft); font-size:11px; letter-spacing:.06em; margin-bottom:3px; }
 
-  /* ILUSTRAȚIE PAHAR COCKTAIL ROZ (FĂRĂ ANIMAZIE) */
+  /* ILUSTRAȚIE PAHAR COCKTAIL ROZ */
   .cocktail-wrap{
     flex:1 1 200px;
     min-width:180px;
@@ -191,7 +184,11 @@
     display:flex;
     justify-content:center;
   }
-  .cocktail-svg{ width:100%; height:auto; filter: drop-shadow(0 10px 20px rgba(255, 42, 133, 0.2)); }
+  .cocktail-svg{ 
+    width:100%; 
+    height:auto; 
+    filter: drop-shadow(0 15px 30px rgba(255, 42, 133, 0.25)); 
+  }
 
   /* ---------- CONTROLS ---------- */
   .controls{
@@ -315,7 +312,6 @@
   .card-img{ aspect-ratio:4/3; width:100%; object-fit:cover; background:var(--bg-panel); transition: transform 0.5s ease; }
   .card:hover .card-img { transform: scale(1.05); }
 
-  /* RIBBON "ESPECIALIDAD" */
   .ribbon {
     position: absolute;
     top: 14px;
@@ -347,11 +343,9 @@
     100% { transform: scale(1); }
   }
 
-  /* MUTAT IN STANGA JOS */
   .fav-btn{
     position:absolute;
-    bottom:12px; left:12px; /* Schimbat de sus-dreapta in stanga-jos */
-    top:auto; right:auto;
+    bottom:12px; left:12px;
     width:42px; height:42px; 
     border-radius:50%;
     border:1px solid rgba(255,255,255,0.15);
@@ -373,11 +367,9 @@
   .fav-btn.active path{ fill:#fff; stroke:#fff; }
   .fav-btn.pop-anim svg { animation: heartPop 0.35s cubic-bezier(0.34, 1.56, 0.64, 1) forwards; }
 
-  /* QUANTITY CONTROLS (IN STANGA JOS) */
   .qty-controls {
     position: absolute;
-    bottom: 12px; left: 12px; /* Aliniat la fel in stanga-jos */
-    top:auto; right:auto;
+    bottom: 12px; left: 12px;
     display: flex;
     align-items: center;
     background: rgba(18, 18, 18, 0.95);
@@ -496,35 +488,64 @@
   }
   .btn-waiter svg { width: 18px; height: 18px; stroke: currentColor; stroke-width: 2; fill: none; stroke-linecap: round; stroke-linejoin: round;}
 
-  /* ---------- SCROLL TO TOP BTN ---------- */
-  .scroll-top-btn {
+  /* ---------- FIXED CORNER BUTTONS (FAV LEFT & SCROLL RIGHT) ---------- */
+  .scroll-top-btn, .global-fav-btn {
     position: fixed;
     bottom: 24px;
-    right: 20px;
-    width: 48px;
     height: 48px;
-    background: var(--pink-main);
-    color: #fff;
     border: none;
-    border-radius: 50%;
+    border-radius: 100px;
     display: flex;
     align-items: center;
     justify-content: center;
     cursor: pointer;
-    box-shadow: 0 6px 16px rgba(255, 42, 133, 0.4);
     z-index: 90;
+    transition: opacity 0.3s, transform 0.3s, background 0.2s, bottom 0.4s cubic-bezier(0.2, 0.8, 0.2, 1), border-color 0.2s;
+    -webkit-tap-highlight-color: transparent;
+  }
+  
+  /* RIGHT - SCROLL TO TOP */
+  .scroll-top-btn {
+    right: 20px;
+    width: 48px;
+    background: var(--pink-main);
+    color: #fff;
+    box-shadow: 0 6px 16px rgba(255, 42, 133, 0.4);
     opacity: 0;
     pointer-events: none;
     transform: translateY(20px);
-    transition: opacity 0.3s, transform 0.3s, background 0.2s;
-    -webkit-tap-highlight-color: transparent;
   }
   .scroll-top-btn.show { opacity: 1; pointer-events: auto; transform: translateY(0); }
-  .scroll-top-btn.lift { bottom: 130px; }
   .scroll-top-btn svg { width: 24px; height: 24px; stroke: currentColor; stroke-width: 2.5; fill: none; stroke-linecap: round; stroke-linejoin: round;}
   .scroll-top-btn:active { background: var(--pink-bright); transform: scale(0.92); }
 
-  /* ---------- MODAL WELCOME (NOU) ---------- */
+  /* LEFT - GLOBAL FAVORITES (NOU) */
+  .global-fav-btn {
+    left: 20px;
+    background: var(--bg-card);
+    border: 1.5px solid var(--paper-dim);
+    padding: 0 16px 0 14px;
+    gap: 8px;
+    box-shadow: 0 6px 16px rgba(0,0,0,0.6);
+    color: var(--ink);
+    font-family: 'Space Mono', monospace;
+    font-size: 14px;
+    font-weight: 700;
+  }
+  .global-fav-btn.has-favs {
+    background: rgba(255, 42, 133, 0.15);
+    border-color: var(--pink-main);
+    color: var(--pink-main);
+  }
+  .global-fav-btn svg { width: 20px; height: 20px; fill: none; stroke: currentColor; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round;}
+  .global-fav-btn.has-favs svg path { fill: var(--pink-main); stroke: var(--pink-main); }
+  .global-fav-btn .fav-count { font-size: 14px; }
+  .global-fav-btn:active { transform: scale(0.92); }
+
+  /* LIFT AMBELE BUTOANE CÂND APARE BARA CU TOTALUL */
+  .scroll-top-btn.lift, .global-fav-btn.lift { bottom: 130px; }
+
+  /* ---------- MODAL WELCOME (POP-UP) ---------- */
   .welcome-overlay {
     position: fixed;
     inset: 0;
@@ -573,6 +594,32 @@
   .welcome-icon svg { width: 36px; height: 36px; fill: currentColor; }
   .welcome-modal h2 { font-size: 1.6rem; color: var(--ink); margin-bottom: 12px; }
   .welcome-modal p { font-size: 15px; color: var(--ink-soft); margin-bottom: 24px; line-height: 1.5; }
+
+  /* ALEGE LIMBA IN WELCOME MODAL */
+  .welcome-langs { display: flex; gap: 12px; justify-content: center; margin-bottom: 24px; }
+  .lang-btn {
+    flex: 1;
+    padding: 12px 10px;
+    border: 1.5px solid var(--paper-dim);
+    background: transparent;
+    color: var(--ink-soft);
+    border-radius: var(--radius-md);
+    font-family: 'Work Sans', sans-serif;
+    font-weight: 600;
+    font-size: 14px;
+    cursor: pointer;
+    transition: all 0.2s;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+  }
+  .lang-btn.active {
+    border-color: var(--pink-main);
+    background: rgba(255, 42, 133, 0.15);
+    color: #fff;
+  }
+  .flag { font-size: 1.25rem; }
 
   /* ---------- FOOTER ---------- */
   footer{ background:var(--bg-card); border-top: 1px solid var(--paper-dim); color:var(--ink-soft); padding:40px 0 26px; font-size:13.5px; }
@@ -692,8 +739,7 @@
   @media (max-width:640px){
     .hero{ padding-top:44px; }
     .top-actions{ top:14px; right:14px; gap:6px; }
-    .lang-toggle, .fav-shortcut{ padding:6px 12px; font-size:12px; min-height:36px; }
-    .fav-shortcut{ padding-left:10px; }
+    .lang-toggle{ padding:6px 12px; font-size:12px; min-height:36px; }
     .hero-inner{ text-align:center; justify-content:center; }
     .hero-meta{ justify-content:center; }
     .tag-filters { margin: 0 -20px; padding-left: 20px; padding-right: 20px; }
@@ -701,7 +747,9 @@
     .grid{ grid-template-columns:1fr; }
     
     .action-buttons { flex-direction: column; }
-    .scroll-top-btn.lift { bottom: 180px; }
+    
+    /* Mobil Lift Adjustment */
+    .scroll-top-btn.lift, .global-fav-btn.lift { bottom: 180px; }
   }
   @media (min-width:641px){
     .controls { flex-direction: row; align-items: center; justify-content: space-between; }
@@ -715,11 +763,8 @@
 
 <header class="hero">
   <div class="top-actions">
-    <button class="fav-shortcut" id="favShortcut" type="button" aria-label="Ver selección">
-      <svg viewBox="0 0 24 24"><path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/></svg>
-      <span class="fav-count" id="favCount">0</span>
-    </button>
-    <button class="lang-toggle" id="langToggle" type="button">EN</button>
+    <!-- BUTON LIMBA SUS-DREAPTA CU STEAG -->
+    <button class="lang-toggle" id="langToggle" type="button">🇪🇸 ES</button>
   </div>
   <div class="wrap hero-inner">
     <div class="hero-text">
@@ -778,9 +823,18 @@
   </div>
 </div>
 
+<!-- ================= BUTOANE FIXATE JOS ================= -->
+<!-- STANGA: FAVORITE GLOBALE (MUTAT AICI) -->
+<button class="global-fav-btn" id="favShortcut" type="button" aria-label="Ver selección">
+  <svg viewBox="0 0 24 24"><path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/></svg>
+  <span class="fav-count" id="favCount">0</span>
+</button>
+
+<!-- DREAPTA: SĂGEATĂ SUS -->
 <button class="scroll-top-btn" id="scrollTopBtn" aria-label="Volver arriba">
   <svg viewBox="0 0 24 24"><path d="M18 15l-6-6-6 6"/></svg>
 </button>
+<!-- ======================================================== -->
 
 <!-- ---------- MODAL WELCOME (POP-UP) ---------- -->
 <div class="welcome-overlay" id="welcomeOverlay">
@@ -788,9 +842,16 @@
     <div class="welcome-icon">
       <svg viewBox="0 0 24 24"><path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/></svg>
     </div>
-    <h2 id="txtWelcomeTitle">¡Bienvenidos!</h2>
+    <h2 id="txtWelcomeTitle">¡Bienvenidos a Fiera Bar!</h2>
     <p id="txtWelcomeDesc">Explora nuestro menú y añade tus favoritos.</p>
-    <button class="btn-submit" id="btnWelcomeClose">¡Empezar!</button>
+
+    <!-- SELECȚIE DE LIMBĂ ÎN MODAL CU STEAGURI -->
+    <div class="welcome-langs">
+      <button class="lang-btn active" data-lang="es"><span class="flag">🇪🇸</span> Español</button>
+      <button class="lang-btn" data-lang="en"><span class="flag">🇬🇧</span> English</button>
+    </div>
+
+    <button class="btn-submit" id="btnWelcomeClose">¡Empezar a pedir!</button>
   </div>
 </div>
 
@@ -904,7 +965,7 @@
       modalP2: 'Tus favoritos se guardan localmente en tu dispositivo.',
       modalP3: 'La información mostrada tiene carácter orientativo.',
       favShortcutLabel: 'Mi Selección',
-      toggleLabel: 'EN',
+      toggleLabel: '🇬🇧 EN', // Cand esti pe spaniola, iti propune engleza
       totalLabel: 'Total Selección:',
       btnWhatsApp: 'Pedir WhatsApp',
       btnWaiter: 'Mostrar al Camarero',
@@ -942,7 +1003,7 @@
       modalP2: 'Your favorites are saved locally on your device.',
       modalP3: 'The information shown is for guidance only.',
       favShortcutLabel: 'My Selection',
-      toggleLabel: 'ES',
+      toggleLabel: '🇪🇸 ES', // Cand esti pe engleza, iti propune spaniola
       totalLabel: 'Total Selection:',
       btnWhatsApp: 'WhatsApp Order',
       btnWaiter: 'Show to Waiter',
@@ -1052,7 +1113,7 @@
   function applyStaticText(){
     const t = UI[currentLang];
     htmlRoot.lang = currentLang;
-    langToggle.textContent = t.toggleLabel;
+    langToggle.innerHTML = t.toggleLabel;
     favShortcut.setAttribute('aria-label', t.favShortcutLabel);
     document.getElementById('txtEyebrow').textContent = t.eyebrow;
     document.getElementById('txtTitle').textContent = t.titleEm;
@@ -1086,6 +1147,15 @@
     document.getElementById('txtWelcomeTitle').textContent = t.welcomeTitle;
     document.getElementById('txtWelcomeDesc').textContent = t.welcomeDesc;
     document.getElementById('btnWelcomeClose').textContent = t.welcomeBtn;
+
+    /* ACTUALIZARE BUTOANE LIMBĂ WELCOME SCREEN */
+    document.querySelectorAll('.lang-btn').forEach(btn => {
+      if(btn.dataset.lang === currentLang) {
+        btn.classList.add('active');
+      } else {
+        btn.classList.remove('active');
+      }
+    });
   }
 
   function renderTagFilters(){
@@ -1289,13 +1359,16 @@
   function updateBottomBar() {
       const { items, total } = getSelectedItemsAndTotal();
       
+      // Dacă avem comandă, ridicăm AMBELE butoane fixate (cel de fav. globale și săgeata sus)
       if(activeFilter === 'favorites' && items.length > 0) {
         totalAmount.textContent = `${total.toFixed(2)} €`;
         totalBar.classList.add('show');
         scrollTopBtn.classList.add('lift');
+        favShortcut.classList.add('lift');
       } else {
         totalBar.classList.remove('show');
         scrollTopBtn.classList.remove('lift');
+        favShortcut.classList.remove('lift');
       }
   }
 
@@ -1411,8 +1484,28 @@
   });
 
   searchInput.addEventListener('input', render);
-  langToggle.addEventListener('click', () => { currentLang = currentLang === 'es' ? 'en' : 'es'; saveLang(); refreshAll(); });
-  favShortcut.addEventListener('click', () => { setActiveFilter('favorites'); document.getElementById('categoriesWrap').scrollIntoView({ behavior:'smooth', block:'start' }); });
+  
+  // BUTONUL MIC DE SUS DREAPTA
+  langToggle.addEventListener('click', () => { 
+    currentLang = currentLang === 'es' ? 'en' : 'es'; 
+    saveLang(); 
+    refreshAll(); 
+  });
+  
+  // BUTONUL MARE DE FAVORITE DIN STANGA JOS
+  favShortcut.addEventListener('click', () => { 
+    setActiveFilter('favorites'); 
+    document.getElementById('categoriesWrap').scrollIntoView({ behavior:'smooth', block:'start' }); 
+  });
+
+  // SCHIMBĂ LIMBA DIN MENIUL DE WELCOME (BUN VENIT)
+  document.querySelectorAll('.lang-btn').forEach(btn => {
+    btn.addEventListener('click', (e) => {
+      currentLang = e.currentTarget.dataset.lang;
+      saveLang();
+      refreshAll();
+    });
+  });
 
   window.addEventListener('scroll', () => {
     if (window.scrollY > 300) scrollTopBtn.classList.add('show');
@@ -1435,10 +1528,7 @@
       if(!sessionStorage.getItem('fieraWelcomed')) {
           const welcomeOverlay = document.getElementById('welcomeOverlay');
           
-          // Afișăm modalul după jumătate de secundă ca să se vadă animația
-          setTimeout(() => {
-              welcomeOverlay.classList.add('show');
-          }, 500);
+          setTimeout(() => { welcomeOverlay.classList.add('show'); }, 500);
 
           document.getElementById('btnWelcomeClose').addEventListener('click', () => {
               welcomeOverlay.classList.remove('show');
