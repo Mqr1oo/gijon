@@ -1,4 +1,4 @@
-const CACHE_NAME = 'menu-cache-v1';
+const CACHE_NAME = 'fiera-cache-v1';
 
 const urlsToCache = [
   '/',
@@ -12,7 +12,7 @@ self.addEventListener('install', event => {
   event.waitUntil(
     caches.open(CACHE_NAME)
       .then(cache => {
-        console.log('Cache PWA deschis cu succes');
+        console.log('Cache Fiera Bar deschis cu succes');
         return cache.addAll(urlsToCache);
       })
   );
