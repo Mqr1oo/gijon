@@ -1,4 +1,4 @@
-
+```html
 <!DOCTYPE html>
 <html lang="es" id="htmlRoot">
 <head>
@@ -337,57 +337,32 @@
     border-left: 6px solid transparent;
   }
 
-  @keyframes heartPop {
-    0% { transform: scale(1); }
-    50% { transform: scale(1.35); }
-    100% { transform: scale(1); }
-  }
-
-  .fav-btn{
-    position:absolute;
-    bottom:12px; left:12px;
-    width:42px; height:42px; 
-    border-radius:50%;
-    border:1px solid rgba(255,255,255,0.15);
-    background:rgba(5, 5, 5, 0.7);
-    backdrop-filter:blur(6px);
-    -webkit-backdrop-filter:blur(6px);
-    display:flex;
-    align-items:center;
-    justify-content:center;
-    cursor:pointer;
-    padding:0;
-    -webkit-tap-highlight-color: transparent;
-    transition: background 0.3s;
-    z-index: 10;
-  }
-  .fav-btn svg{ width:22px; height:22px; }
-  .fav-btn path{ fill:none; stroke:var(--ink); stroke-width:1.8; transition:fill .25s, stroke .25s; stroke-linejoin:round; stroke-linecap:round; }
-  .fav-btn.active{ background:var(--pink-main); border-color: var(--pink-main); }
-  .fav-btn.active path{ fill:#fff; stroke:#fff; }
-  .fav-btn.pop-anim svg { animation: heartPop 0.35s cubic-bezier(0.34, 1.56, 0.64, 1) forwards; }
-
-  .qty-controls {
+  /* QUANTITY CONTROLS DIRECT PE FIECARE CARD (DREAPTA SUS PE IMAGINE) */
+  .card-qty-controls {
     position: absolute;
-    bottom: 12px; left: 12px;
+    top: 12px; right: 12px;
     display: flex;
     align-items: center;
-    background: rgba(18, 18, 18, 0.95);
-    border: 1px solid var(--pink-main);
-    backdrop-filter: blur(4px);
-    -webkit-backdrop-filter: blur(4px);
+    background: rgba(18, 18, 18, 0.9);
+    border: 1px solid var(--paper-dim);
+    backdrop-filter: blur(6px);
+    -webkit-backdrop-filter: blur(6px);
     border-radius: 100px;
-    box-shadow: 0 4px 12px rgba(255, 42, 133, 0.3);
+    box-shadow: 0 4px 12px rgba(0,0,0,0.5);
     overflow: hidden;
     z-index: 10;
+    transition: border-color 0.2s;
   }
-  .qty-btn {
+  .card-qty-controls.has-items {
+    border-color: var(--pink-main);
+  }
+  .c-qty-btn {
     width: 34px;
     height: 34px;
     border: none;
     background: transparent;
     color: var(--ink);
-    font-size: 1.3rem;
+    font-size: 1.25rem;
     font-weight: 700;
     cursor: pointer;
     display: flex;
@@ -395,8 +370,8 @@
     justify-content: center;
     transition: background 0.2s, color 0.2s;
   }
-  .qty-btn:active { background: var(--pink-main); color: #fff;}
-  .qty-val {
+  .c-qty-btn:active { background: var(--pink-main); color: #fff;}
+  .c-qty-val {
     width: 26px;
     text-align: center;
     font-family: 'Space Mono', monospace;
@@ -519,28 +494,29 @@
   .scroll-top-btn svg { width: 24px; height: 24px; stroke: currentColor; stroke-width: 2.5; fill: none; stroke-linecap: round; stroke-linejoin: round;}
   .scroll-top-btn:active { background: var(--pink-bright); transform: scale(0.92); }
 
-  /* LEFT - GLOBAL FAVORITES (NOU) */
+  /* LEFT - GLOBAL FAVORITES (INIMĂ PRINCIPALĂ CU CONTUR ROZ FIX ȘI PULSARE) */
+  @keyframes heartPulse {
+    0% { transform: scale(1); }
+    50% { transform: scale(1.12); }
+    100% { transform: scale(1); }
+  }
+
   .global-fav-btn {
     left: 20px;
     background: var(--bg-card);
-    border: 1.5px solid var(--paper-dim);
+    border: 2px solid var(--pink-main); /* Contur roz fix, elegant */
     padding: 0 16px 0 14px;
     gap: 8px;
-    box-shadow: 0 6px 16px rgba(0,0,0,0.6);
+    box-shadow: 0 6px 20px rgba(255, 42, 133, 0.25);
     color: var(--ink);
     font-family: 'Space Mono', monospace;
     font-size: 14px;
     font-weight: 700;
+    animation: heartPulse 2s infinite ease-in-out; /* Pulsare fină continuă */
   }
-  .global-fav-btn.has-favs {
-    background: rgba(255, 42, 133, 0.15);
-    border-color: var(--pink-main);
-    color: var(--pink-main);
-  }
-  .global-fav-btn svg { width: 20px; height: 20px; fill: none; stroke: currentColor; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round;}
-  .global-fav-btn.has-favs svg path { fill: var(--pink-main); stroke: var(--pink-main); }
-  .global-fav-btn .fav-count { font-size: 14px; }
-  .global-fav-btn:active { transform: scale(0.92); }
+  .global-fav-btn svg { width: 22px; height: 22px; fill: none; stroke: var(--pink-main); stroke-width: 2; stroke-linecap: round; stroke-linejoin: round;}
+  .global-fav-btn .fav-count { font-size: 14px; color: var(--pink-bright); }
+  .global-fav-btn:active { transform: scale(0.92); animation: none; }
 
   /* LIFT AMBELE BUTOANE CÂND APARE BARA CU TOTALUL */
   .scroll-top-btn.lift, .global-fav-btn.lift { bottom: 130px; }
@@ -591,7 +567,7 @@
     justify-content: center;
     color: var(--pink-main);
   }
-  .welcome-icon svg { width: 36px; height: 36px; fill: currentColor; }
+  .welcome-icon svg { width: 36px; height: 36px; fill: none; stroke: currentColor; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
   .welcome-modal h2 { font-size: 1.6rem; color: var(--ink); margin-bottom: 12px; }
   .welcome-modal p { font-size: 15px; color: var(--ink-soft); margin-bottom: 24px; line-height: 1.5; }
 
@@ -748,7 +724,6 @@
     
     .action-buttons { flex-direction: column; }
     
-    /* Mobil Lift Adjustment */
     .scroll-top-btn.lift, .global-fav-btn.lift { bottom: 180px; }
   }
   @media (min-width:641px){
@@ -824,7 +799,7 @@
 </div>
 
 <!-- ================= BUTOANE FIXATE JOS ================= -->
-<!-- STANGA: FAVORITE GLOBALE (MUTAT AICI) -->
+<!-- STANGA: INIMA PRINCIPALĂ CU CONTUR ROZ ȘI PULSARE -->
 <button class="global-fav-btn" id="favShortcut" type="button" aria-label="Ver selección">
   <svg viewBox="0 0 24 24"><path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/></svg>
   <span class="fav-count" id="favCount">0</span>
@@ -842,8 +817,8 @@
     <div class="welcome-icon">
       <svg viewBox="0 0 24 24"><path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/></svg>
     </div>
-    <h2 id="txtWelcomeTitle">¡Bienvenidos a Fiera Bar!</h2>
-    <p id="txtWelcomeDesc">Explora nuestro menú y añade tus favoritos.</p>
+    <h2 id="txtWelcomeTitle">Fiera Bar</h2>
+    <p id="txtWelcomeDesc">Por favor, selecciona tu idioma / Please select your language:</p>
 
     <!-- SELECȚIE DE LIMBĂ ÎN MODAL CU STEAGURI -->
     <div class="welcome-langs">
@@ -851,7 +826,7 @@
       <button class="lang-btn" data-lang="en"><span class="flag">🇬🇧</span> English</button>
     </div>
 
-    <button class="btn-submit" id="btnWelcomeClose">¡Empezar a pedir!</button>
+    <button class="btn-submit" id="btnWelcomeClose">Continuar</button>
   </div>
 </div>
 
@@ -965,7 +940,7 @@
       modalP2: 'Tus favoritos se guardan localmente en tu dispositivo.',
       modalP3: 'La información mostrada tiene carácter orientativo.',
       favShortcutLabel: 'Mi Selección',
-      toggleLabel: '🇬🇧 EN', // Cand esti pe spaniola, iti propune engleza
+      toggleLabel: '🇬🇧 EN',
       totalLabel: 'Total Selección:',
       btnWhatsApp: 'Pedir WhatsApp',
       btnWaiter: 'Mostrar al Camarero',
@@ -978,10 +953,9 @@
       clearWaiterBtn: '¡Pedido Tomado!',
       whatsappIntro: '¡Hola! Somos la mesa {mesa}. Nos gustaría pedir:',
       
-      // TEXTE WELCOME SCREEN 
-      welcomeTitle: '¡Bienvenidos a Fiera Bar!',
-      welcomeDesc: 'Explora nuestro menú y usa el corazón (♡) para añadir tus platos y cócteles a tu pedido.',
-      welcomeBtn: '¡Empezar a pedir!'
+      welcomeTitle: 'Fiera Bar',
+      welcomeDesc: 'Por favor, selecciona tu idioma:',
+      welcomeBtn: 'Continuar'
     },
     en: {
       eyebrow: 'Digital menu',
@@ -1003,7 +977,7 @@
       modalP2: 'Your favorites are saved locally on your device.',
       modalP3: 'The information shown is for guidance only.',
       favShortcutLabel: 'My Selection',
-      toggleLabel: '🇪🇸 ES', // Cand esti pe engleza, iti propune spaniola
+      toggleLabel: '🇪🇸 ES',
       totalLabel: 'Total Selection:',
       btnWhatsApp: 'WhatsApp Order',
       btnWaiter: 'Show to Waiter',
@@ -1016,10 +990,9 @@
       clearWaiterBtn: 'Order Taken!',
       whatsappIntro: 'Hi! We are table {mesa}. We would like to order:',
 
-      // TEXTE WELCOME SCREEN
-      welcomeTitle: 'Welcome to Fiera Bar!',
-      welcomeDesc: 'Explore our menu and use the heart (♡) to add dishes and cocktails to your order.',
-      welcomeBtn: 'Start ordering!'
+      welcomeTitle: 'Fiera Bar',
+      welcomeDesc: 'Please select your language:',
+      welcomeBtn: 'Continue'
     }
   };
 
@@ -1058,7 +1031,6 @@
   function updateFavShortcut(){
     const count = getFavCount();
     favCountEl.textContent = count;
-    favShortcut.classList.toggle('has-favs', count > 0);
   }
 
   function getQty(item) { return favoritesQty[item.imageNumber] || 0; }
@@ -1099,7 +1071,6 @@
 
   function localImagePath(imageNumber){ return `images/${imageNumber}.jpg`; }
   
-  /* LIBRĂRIE INTELIGENTĂ IMAGINI FALLBACK */
   function fallbackImageUrl(item){
     let seed = 0;
     if(item.name) { for (let i = 0; i < item.name.length; i++) seed += item.name.charCodeAt(i); }
@@ -1143,12 +1114,10 @@
     document.getElementById('closeWaiterBtn').textContent = t.closeWaiterBtn;
     document.getElementById('clearWaiterBtn').textContent = t.clearWaiterBtn;
 
-    /* APLICARE TEXTE WELCOME MODAL */
     document.getElementById('txtWelcomeTitle').textContent = t.welcomeTitle;
     document.getElementById('txtWelcomeDesc').textContent = t.welcomeDesc;
     document.getElementById('btnWelcomeClose').textContent = t.welcomeBtn;
 
-    /* ACTUALIZARE BUTOANE LIMBĂ WELCOME SCREEN */
     document.querySelectorAll('.lang-btn').forEach(btn => {
       if(btn.dataset.lang === currentLang) {
         btn.classList.add('active');
@@ -1203,10 +1172,7 @@
     return (text.name + ' ' + text.description + ' ' + text.ingredients.join(' ')).toLowerCase().includes(query);
   }
 
-  function heartIconSvg(){
-    return '<svg viewBox="0 0 24 24"><path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/></svg>';
-  }
-
+  /* CONSTRUIRE CARDURI CU CONTROL DIRECT - 1 + FĂRĂ INIMĂ INDIVIDUALĂ */
   function buildCard(item, index){
     const t = UI[currentLang];
     const text = itemText(item);
@@ -1235,64 +1201,52 @@
     });
     imgWrap.appendChild(img);
 
-    const favBtn = document.createElement('button');
-    favBtn.type = 'button';
-    
-    let currentQty = getQty(item);
-    favBtn.className = 'fav-btn' + (currentQty > 0 ? ' active' : '');
-    favBtn.innerHTML = heartIconSvg();
-    
+    /* CONTROALE CANTITATE PE CARD (- VAL +) */
     const qtyWrap = document.createElement('div');
-    qtyWrap.className = 'qty-controls';
-    qtyWrap.style.display = currentQty > 0 ? 'flex' : 'none';
-    
+    let currentQty = getQty(item);
+    qtyWrap.className = 'card-qty-controls' + (currentQty > 0 ? ' has-items' : '');
+
     const minusBtn = document.createElement('button');
-    minusBtn.className = 'qty-btn';
+    minusBtn.className = 'c-qty-btn';
+    minusBtn.type = 'button';
     minusBtn.textContent = '−';
-    
+
     const qtyLabel = document.createElement('span');
-    qtyLabel.className = 'qty-val';
+    qtyLabel.className = 'c-qty-val';
     qtyLabel.textContent = currentQty;
-    
+
     const plusBtn = document.createElement('button');
-    plusBtn.className = 'qty-btn';
+    plusBtn.className = 'c-qty-btn';
+    plusBtn.type = 'button';
     plusBtn.textContent = '+';
-    
+
     qtyWrap.appendChild(minusBtn);
     qtyWrap.appendChild(qtyLabel);
     qtyWrap.appendChild(plusBtn);
-    
+
     function refreshCardUI() {
-        let q = getQty(item);
-        if(q > 0) {
-            favBtn.classList.add('active');
-            qtyWrap.style.display = 'flex';
-            qtyLabel.textContent = q;
-            favBtn.style.display = 'none'; 
-        } else {
-            favBtn.classList.remove('active');
-            qtyWrap.style.display = 'none';
-            favBtn.style.display = 'flex';
-        }
-        updateFavShortcut();
-        if(activeFilter === 'favorites' && q === 0) render(); 
-        else updateBottomBar(); 
+      let q = getQty(item);
+      qtyLabel.textContent = q;
+      if(q > 0) {
+        qtyWrap.classList.add('has-items');
+      } else {
+        qtyWrap.classList.remove('has-items');
+      }
+      updateFavShortcut();
+      if(activeFilter === 'favorites' && q === 0) render();
+      else updateBottomBar();
     }
 
-    favBtn.addEventListener('click', () => {
-      favBtn.classList.remove('pop-anim');
-      void favBtn.offsetWidth; 
-      favBtn.classList.add('pop-anim');
-      
+    plusBtn.addEventListener('click', () => {
       updateQty(item, 1);
       refreshCardUI();
-      setTimeout(() => favBtn.classList.remove('pop-anim'), 400);
     });
-    
-    plusBtn.addEventListener('click', () => { updateQty(item, 1); refreshCardUI(); });
-    minusBtn.addEventListener('click', () => { updateQty(item, -1); refreshCardUI(); });
 
-    imgWrap.appendChild(favBtn);
+    minusBtn.addEventListener('click', () => {
+      updateQty(item, -1);
+      refreshCardUI();
+    });
+
     imgWrap.appendChild(qtyWrap);
     card.appendChild(imgWrap);
 
@@ -1359,7 +1313,6 @@
   function updateBottomBar() {
       const { items, total } = getSelectedItemsAndTotal();
       
-      // Dacă avem comandă, ridicăm AMBELE butoane fixate (cel de fav. globale și săgeata sus)
       if(activeFilter === 'favorites' && items.length > 0) {
         totalAmount.textContent = `${total.toFixed(2)} €`;
         totalBar.classList.add('show');
@@ -1485,20 +1438,17 @@
 
   searchInput.addEventListener('input', render);
   
-  // BUTONUL MIC DE SUS DREAPTA
   langToggle.addEventListener('click', () => { 
     currentLang = currentLang === 'es' ? 'en' : 'es'; 
     saveLang(); 
     refreshAll(); 
   });
   
-  // BUTONUL MARE DE FAVORITE DIN STANGA JOS
   favShortcut.addEventListener('click', () => { 
     setActiveFilter('favorites'); 
     document.getElementById('categoriesWrap').scrollIntoView({ behavior:'smooth', block:'start' }); 
   });
 
-  // SCHIMBĂ LIMBA DIN MENIUL DE WELCOME (BUN VENIT)
   document.querySelectorAll('.lang-btn').forEach(btn => {
     btn.addEventListener('click', (e) => {
       currentLang = e.currentTarget.dataset.lang;
@@ -1524,10 +1474,8 @@
       renderTagFilters();
       render();
       
-      /* AFIȘARE WELCOME MODAL LA PRIMA VIZITĂ */
       if(!sessionStorage.getItem('fieraWelcomed')) {
           const welcomeOverlay = document.getElementById('welcomeOverlay');
-          
           setTimeout(() => { welcomeOverlay.classList.add('show'); }, 500);
 
           document.getElementById('btnWelcomeClose').addEventListener('click', () => {
