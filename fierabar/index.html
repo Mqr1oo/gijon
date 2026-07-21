@@ -1,4 +1,4 @@
-
+```html
 <!DOCTYPE html>
 <html lang="es" id="htmlRoot">
 <head>
@@ -494,11 +494,11 @@
   .scroll-top-btn svg { width: 24px; height: 24px; stroke: currentColor; stroke-width: 2.5; fill: none; stroke-linecap: round; stroke-linejoin: round;}
   .scroll-top-btn:active { background: var(--pink-bright); transform: scale(0.92); }
 
-  /* LEFT - GLOBAL FAVORITES (INIMĂ PRINCIPALĂ CU CONTUR ROZ FIX ȘI PULSARE) */
-  @keyframes heartPulse {
-    0% { transform: scale(1); }
-    50% { transform: scale(1.12); }
-    100% { transform: scale(1); }
+  /* LEFT - GLOBAL FAVORITES (GLOW ANIMATION - FĂRĂ SCALE) */
+  @keyframes heartGlow {
+    0% { box-shadow: 0 0 5px rgba(255, 42, 133, 0.3), inset 0 0 0 transparent; }
+    50% { box-shadow: 0 0 25px rgba(255, 42, 133, 0.8), inset 0 0 10px rgba(255, 42, 133, 0.2); }
+    100% { box-shadow: 0 0 5px rgba(255, 42, 133, 0.3), inset 0 0 0 transparent; }
   }
 
   .global-fav-btn {
@@ -507,18 +507,18 @@
     border: 2px solid var(--pink-main);
     padding: 0 16px 0 14px;
     gap: 8px;
-    box-shadow: 0 6px 20px rgba(255, 42, 133, 0.25);
     color: var(--ink);
     font-family: 'Space Mono', monospace;
     font-size: 14px;
     font-weight: 700;
-    animation: heartPulse 2s infinite ease-in-out;
+    animation: heartGlow 2s infinite ease-in-out; /* Pulsare luminoasă */
   }
   .global-fav-btn svg { width: 22px; height: 22px; fill: none; stroke: var(--pink-main); stroke-width: 2; stroke-linecap: round; stroke-linejoin: round;}
   .global-fav-btn .fav-count { font-size: 14px; color: var(--pink-bright); }
   .global-fav-btn:active { transform: scale(0.92); animation: none; }
 
-  .scroll-top-btn.lift, .global-fav-btn.lift { bottom: 130px; }
+  /* LIFT AMBELE BUTOANE CÂND APARE BARA CU TOTALUL (RIDICAT MULT MAI SUS) */
+  .scroll-top-btn.lift, .global-fav-btn.lift { bottom: 160px; }
 
   /* ---------- MODAL WELCOME (POP-UP) ---------- */
   .welcome-overlay {
@@ -723,7 +723,8 @@
     
     .action-buttons { flex-direction: column; }
     
-    .scroll-top-btn.lift, .global-fav-btn.lift { bottom: 180px; }
+    /* PE MOBIL RIDICĂM MAI SUS (PENTRU CĂ BARA DE COMANDĂ E MAI GROASĂ) */
+    .scroll-top-btn.lift, .global-fav-btn.lift { bottom: 230px; }
   }
   @media (min-width:641px){
     .controls { flex-direction: row; align-items: center; justify-content: space-between; }
@@ -737,7 +738,6 @@
 
 <header class="hero">
   <div class="top-actions">
-    <!-- BUTON LIMBA SUS-DREAPTA CU STEAG -->
     <button class="lang-toggle" id="langToggle" type="button">🇪🇸 ES</button>
   </div>
   <div class="wrap hero-inner">
@@ -750,7 +750,6 @@
       </div>
     </div>
     
-    <!-- ILUSTRAȚIE FIXĂ: Pahar de cocktail geometric alb cu roz -->
     <div class="cocktail-wrap" aria-hidden="true">
       <svg class="cocktail-svg" viewBox="0 0 200 200" fill="none" xmlns="http://www.w3.org/2000/svg">
         <line x1="130" y1="20" x2="85" y2="120" stroke="#ffffff" stroke-width="4" stroke-linecap="round"/>
@@ -804,7 +803,6 @@
 </button>
 <!-- ======================================================== -->
 
-<!-- ---------- MODAL WELCOME (POP-UP) ---------- -->
 <div class="welcome-overlay" id="welcomeOverlay">
   <div class="welcome-modal">
     <div class="welcome-icon">
@@ -881,7 +879,24 @@
   
   let appConfig = { whatsapp_number: "" }; 
 
-  // LIBRĂRIE DE REZERVĂ (FALLBACK) DACĂ MENU.JSON LIPSEȘTE SAU NU ARE DESTULE PRODUSE
+  // NOILE LIBRĂRII DE IMAGINI PREMIUM UNSPLASH
+  const FALLBACK_DRINKS = [
+    "https://images.unsplash.com/photo-1514362545857-3bc16c4c7d1b?auto=format&fit=crop&w=480&q=80",
+    "https://images.unsplash.com/photo-1536935338788-846bb9981813?auto=format&fit=crop&w=480&q=80",
+    "https://images.unsplash.com/photo-1551024709-8f23befc6f87?auto=format&fit=crop&w=480&q=80",
+    "https://images.unsplash.com/photo-1513558161293-cdaf765ed2fd?auto=format&fit=crop&w=480&q=80",
+    "https://images.unsplash.com/photo-1575037614876-c385cb814cff?auto=format&fit=crop&w=480&q=80"
+  ];
+  
+  const FALLBACK_FOOD = [
+    "https://images.unsplash.com/photo-1541592106381-b31e9677c0e5?auto=format&fit=crop&w=480&q=80",
+    "https://images.unsplash.com/photo-1512621776951-a57141f2eefd?auto=format&fit=crop&w=480&q=80",
+    "https://images.unsplash.com/photo-1467003909585-2f8a72700288?auto=format&fit=crop&w=480&q=80",
+    "https://images.unsplash.com/photo-1560684352-8497838a2229?auto=format&fit=crop&w=480&q=80",
+    "https://images.unsplash.com/photo-1476224203421-9ac39bcb3327?auto=format&fit=crop&w=480&q=80",
+    "https://images.unsplash.com/photo-1504674900247-0877df9cc836?auto=format&fit=crop&w=480&q=80"
+  ];
+
   const FALLBACK_MENU = [
     {
       "imageNumber": 1,
@@ -1127,14 +1142,18 @@
 
   function localImagePath(imageNumber){ return `images/${imageNumber}.jpg`; }
   
+  // FUNCȚIE ACTUALIZATĂ PENTRU LIBRĂRIA NOUĂ DE IMAGINI UNSPLASH
   function fallbackImageUrl(item){
     let seed = 0;
     if(item.name) { for (let i = 0; i < item.name.length; i++) seed += item.name.charCodeAt(i); }
     
     let isDrink = item.tags && (item.tags.includes('coctel') || item.tags.includes('bebida') || item.tags.includes('sidra'));
-    let category = isDrink ? 'cocktail,drink' : 'food,tapas,meal';
     
-    return `https://loremflickr.com/480/360/${category}?lock=${seed}`;
+    if(isDrink) {
+      return FALLBACK_DRINKS[seed % FALLBACK_DRINKS.length];
+    } else {
+      return FALLBACK_FOOD[seed % FALLBACK_FOOD.length];
+    }
   }
 
   function applyStaticText(){
@@ -1521,7 +1540,6 @@
     fetch('menu.json').then(r => r.ok ? r.json() : []).catch(() => []),
     fetch('config.json').then(r => r.ok ? r.json() : { whatsapp_number: "" }).catch(() => ({ whatsapp_number: "" }))
   ]).then(([menuData, configData]) => {
-      // Dacă menu.json este gol sau lipsă, folosim librăria de rezervă
       allItems = (menuData && menuData.length > 0) ? menuData : FALLBACK_MENU;
       appConfig = configData;
       
