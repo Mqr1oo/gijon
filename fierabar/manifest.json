@@ -1,11 +1,11 @@
 {
-  "name": "La Marea - Menú Digital",
-  "short_name": "La Marea",
-  "description": "Menú digital y pedidos para el restaurante La Marea, Gijón.",
+  "name": "Fiera Bar - Menú Digital",
+  "short_name": "Fiera Bar",
+  "description": "Menú digital y pedidos para Fiera Bar.",
   "start_url": "/",
   "display": "standalone",
-  "background_color": "#f3ecdc",
-  "theme_color": "#081f2c",
+  "background_color": "#09090b",
+  "theme_color": "#ff7a00",
   "orientation": "portrait",
   "icons": [
     {
