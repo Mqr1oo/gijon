@@ -1,15 +1,15 @@
-
+```html
 <!DOCTYPE html>
 <html lang="es" id="htmlRoot">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
-<title>La Marea &mdash; Menú digital, Gijón</title>
-<meta name="description" content="Menú digital de La Marea, cocina asturiana en Gijón.">
+<title>Fiera Bar &mdash; Menú digital</title>
+<meta name="description" content="Menú digital de Fiera Bar. Cócteles, tapas y buen ambiente.">
 
 <!-- ===== SETĂRI APLICAȚIE (PWA) ===== -->
 <link rel="manifest" href="manifest.json">
-<meta name="theme-color" content="#081f2c">
+<meta name="theme-color" content="#000000">
 <link rel="apple-touch-icon" href="icons/icon-192.png">
 <script>
   if ('serviceWorker' in navigator) {
@@ -27,22 +27,21 @@
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600;9..144,700&family=Work+Sans:wght@400;500;600;700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
 <style>
   :root{
-    --navy:#0b2b3c;
-    --navy-deep:#081f2c;
-    --navy-panel:#123249;
-    --foam:#8fd1c2;
-    --foam-dim:#5fa596;
-    --gold:#c69436;
-    --gold-bright:#e0ac48;
-    --paper:#f3ecdc;
-    --paper-dim:#e7dcc4;
-    --ink:#1c2b2e;
-    --ink-soft:#4a5a5c;
-    --coral:#c1553a;
-    --radius:4px;
-    --radius-md:14px;
-    --radius-lg:20px;
-    --max-w:1180px;
+    /* TEMA: NEGRU, ALB & ROZ */
+    --bg-base: #050505; 
+    --bg-card: #121212; 
+    --bg-panel: #1a1a1a;
+    --ink: #ffffff; 
+    --ink-soft: #a1a1aa; 
+    --pink-main: #ff2a85; /* Roz vibrant inspirat din brand */
+    --pink-bright: #ff529f;
+    --paper-dim: #262626; /* Borduri subtile */
+    --coral: #ff4757;
+    
+    --radius: 4px;
+    --radius-md: 14px;
+    --radius-lg: 20px;
+    --max-w: 1180px;
   }
 
   *{ box-sizing:border-box; }
@@ -56,7 +55,7 @@
   html{ scroll-behavior:smooth; }
   body{
     margin:0;
-    background:var(--paper);
+    background:var(--bg-base);
     color:var(--ink);
     font-family:'Work Sans', sans-serif;
     font-size:16px;
@@ -67,7 +66,7 @@
   a{ color:inherit; }
 
   :focus-visible{
-    outline:2px solid var(--gold-bright);
+    outline:2px solid var(--pink-main);
     outline-offset:3px;
   }
 
@@ -85,13 +84,14 @@
 
   /* ---------- HERO ---------- */
   .hero{
-    background:
-      radial-gradient(ellipse at 80% 0%, rgba(143,209,194,0.10), transparent 55%),
-      linear-gradient(180deg, var(--navy-deep), var(--navy) 70%);
-    color:var(--paper);
+    background: 
+      radial-gradient(ellipse at 80% 10%, rgba(255, 42, 133, 0.12), transparent 50%),
+      var(--bg-base);
+    color:var(--ink);
     padding:60px 0 0;
     overflow:hidden;
     position:relative;
+    border-bottom: 1px solid var(--paper-dim);
   }
   .top-actions{
     position:absolute;
@@ -108,13 +108,15 @@
     padding:8px 14px;
     min-height:40px;
     border-radius:100px;
-    border:1.5px solid var(--foam-dim);
-    background:rgba(8,31,44,0.35);
-    color:var(--paper);
+    border:1.5px solid var(--paper-dim);
+    background:rgba(18, 18, 18, 0.7);
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+    color:var(--ink);
     cursor:pointer;
-    transition:background .2s, transform .15s cubic-bezier(0.34, 1.56, 0.64, 1);
+    transition:background .2s, transform .15s, border-color .2s;
   }
-  .lang-toggle:hover, .fav-shortcut:hover{ background:rgba(8,31,44,0.6); }
+  .lang-toggle:hover, .fav-shortcut:hover{ background:var(--bg-panel); border-color: var(--pink-main); }
   .lang-toggle:active, .fav-shortcut:active{ transform:scale(0.92); }
   .fav-shortcut{
     display:flex;
@@ -123,16 +125,16 @@
     padding:8px 12px 8px 10px;
   }
   .fav-shortcut svg{ width:18px; height:18px; flex-shrink:0; }
-  .fav-shortcut path{ fill:none; stroke:var(--paper); stroke-width:2; transition:fill .2s, stroke .2s; stroke-linejoin:round; stroke-linecap:round;}
-  .fav-shortcut.has-favs{ border-color:var(--coral); }
-  .fav-shortcut.has-favs path{ fill:var(--coral); stroke:var(--coral); }
+  .fav-shortcut path{ fill:none; stroke:var(--ink); stroke-width:2; transition:fill .2s, stroke .2s; stroke-linejoin:round; stroke-linecap:round;}
+  .fav-shortcut.has-favs{ border-color:var(--pink-main); background: rgba(255, 42, 133, 0.15);}
+  .fav-shortcut.has-favs path{ fill:var(--pink-main); stroke:var(--pink-main); }
   .fav-count{ min-width:14px; text-align:left; font-weight: 600;}
   .hero-inner{
     display:flex;
     flex-wrap:wrap;
     align-items:center;
     gap:32px;
-    padding-bottom:30px;
+    padding-bottom:50px;
     padding-top:24px;
   }
   .hero-text{ flex:1 1 340px; min-width:260px; }
@@ -141,7 +143,7 @@
     letter-spacing:.14em;
     text-transform:uppercase;
     font-size:12px;
-    color:var(--foam);
+    color:var(--pink-main);
     display:flex;
     align-items:center;
     gap:10px;
@@ -150,7 +152,7 @@
   .eyebrow::before{
     content:"";
     width:22px; height:1px;
-    background:var(--foam-dim);
+    background:var(--pink-main);
     display:inline-block;
   }
   .hero h1{
@@ -160,13 +162,13 @@
   }
   .hero h1 em{
     font-style:italic;
-    color:var(--gold-bright);
+    color: var(--pink-main);
     font-weight:500;
   }
   .hero p.tag{
     margin-top:18px;
     max-width:46ch;
-    color:#cfe3de;
+    color:var(--ink-soft);
     font-size:1.02rem;
   }
   .hero-meta{
@@ -176,44 +178,20 @@
     flex-wrap:wrap;
     font-family:'Space Mono', monospace;
     font-size:12.5px;
-    color:var(--foam);
+    color:var(--ink);
   }
-  .hero-meta span{ display:block; color:#8fa9a3; font-size:11px; letter-spacing:.06em; margin-bottom:3px; }
+  .hero-meta span{ display:block; color:var(--ink-soft); font-size:11px; letter-spacing:.06em; margin-bottom:3px; }
 
-  .sea-wrap{
-    flex:1 1 240px;
-    min-width:220px;
-    max-width:320px;
+  /* ILUSTRAȚIE PAHAR COCKTAIL ROZ (FĂRĂ ANIMAZIE) */
+  .cocktail-wrap{
+    flex:1 1 200px;
+    min-width:180px;
+    max-width:240px;
     margin:0 auto;
     display:flex;
     justify-content:center;
   }
-  .sea-svg{ width:100%; height:auto; }
-
-  .wave-group{ animation:drift 14s linear infinite; }
-  .wave-group.back{ animation-duration:20s; animation-direction:reverse; opacity:0.55; }
-  @keyframes drift{ from{ transform:translateX(0); } to{ transform:translateX(-150px); } }
-
-  .boat{ transform-origin:150px 108px; animation:bob 3.2s ease-in-out infinite; }
-  @keyframes bob{
-    0%,100%{ transform:translateY(0) rotate(-2deg); }
-    50%{ transform:translateY(-5px) rotate(2deg); }
-  }
-
-  .gull{ animation:fly 5s ease-in-out infinite; }
-  .gull.g2{ animation-duration:6.5s; animation-delay:.6s; }
-  @keyframes fly{
-    0%,100%{ transform:translate(0,0); }
-    50%{ transform:translate(-8px,-6px); }
-  }
-
-  @media (prefers-reduced-motion: reduce){
-    .wave-group, .boat, .gull{ animation:none; }
-  }
-
-  /* wave divider */
-  .wave-divider{ display:block; width:100%; height:40px; background:var(--paper); }
-  .wave-divider svg{ width:100%; height:100%; display:block; }
+  .cocktail-svg{ width:100%; height:auto; filter: drop-shadow(0 10px 20px rgba(255, 42, 133, 0.2)); }
 
   /* ---------- CONTROLS ---------- */
   .controls{
@@ -226,7 +204,7 @@
   .search-box{
     display: flex;
     align-items: center;
-    background: #fff;
+    background: var(--bg-card);
     border: 1.5px solid var(--paper-dim);
     border-radius: var(--radius-md);
     padding: 0 14px;
@@ -235,8 +213,8 @@
     transition: border-color 0.3s, box-shadow 0.3s;
   }
   .search-box:focus-within {
-    border-color: var(--foam-dim);
-    box-shadow: 0 6px 16px rgba(143,209,194,0.18);
+    border-color: var(--pink-main);
+    box-shadow: 0 4px 16px rgba(255, 42, 133, 0.2);
   }
   .search-icon{
     width: 18px; 
@@ -259,7 +237,7 @@
     -webkit-appearance: none;
     border-radius: 0;
   }
-  .search-box input::placeholder { color: #8c9799; }
+  .search-box input::placeholder { color: var(--ink-soft); }
 
   .tag-filters{
     display: flex;
@@ -281,31 +259,31 @@
     align-items: center;
     justify-content: center;
     border-radius: 100px;
-    border: 1.5px solid var(--navy-panel);
-    background: #fff;
-    color: var(--navy-panel);
+    border: 1.5px solid var(--paper-dim);
+    background: var(--bg-card);
+    color: var(--ink-soft);
     cursor: pointer;
     white-space: nowrap;
-    transition: background .2s, color .2s, transform .15s cubic-bezier(0.34, 1.56, 0.64, 1), box-shadow .2s;
+    transition: all .2s;
     user-select: none;
     -webkit-tap-highlight-color: transparent;
   }
   .chip:active{ transform: translateY(0) scale(0.94); }
   .chip.active{
-    background: var(--navy); 
-    color: var(--paper); 
-    border-color: var(--navy);
+    background: var(--pink-main);
+    color: #fff; 
+    border-color: var(--pink-main);
     font-weight: 700;
-    box-shadow: 0 4px 12px rgba(11,43,60,0.3);
+    box-shadow: 0 4px 12px rgba(255, 42, 133, 0.35);
   }
   
   /* ---------- CATEGORY SECTIONS / GRID ---------- */
-  .menu-section{ padding: 10px 0 160px; /* Extins pentru noua bară de total */ }
+  .menu-section{ padding: 10px 0 160px; }
   .category-section{ margin-top:38px; }
   .category-section h2{
     font-size:1.5rem;
     padding-bottom:8px;
-    border-bottom:2px solid var(--gold);
+    border-bottom:2px solid var(--pink-main);
     display:inline-block;
   }
   .grid{
@@ -321,20 +299,20 @@
   }
 
   .card{
-    background:#fff;
+    background:var(--bg-card);
     border-radius:var(--radius-lg);
     overflow:hidden;
-    box-shadow:0 4px 12px rgba(11,43,60,0.06);
+    box-shadow:0 4px 16px rgba(0,0,0,0.4);
     border:1px solid var(--paper-dim);
     display:flex;
     flex-direction:column;
-    transition:transform .25s ease, box-shadow .25s ease;
+    transition:transform .25s ease, box-shadow .25s ease, border-color .25s;
     opacity: 0;
     animation: fadeUpIn 0.5s cubic-bezier(0.2, 0.8, 0.2, 1) forwards;
   }
-  .card:hover{ transform:translateY(-6px); box-shadow:0 16px 32px rgba(11,43,60,0.12); }
+  .card:hover{ transform:translateY(-6px); box-shadow:0 12px 28px rgba(0,0,0,0.6); border-color: var(--pink-main);}
   .card-img-wrap{ position:relative; overflow:hidden; }
-  .card-img{ aspect-ratio:4/3; width:100%; object-fit:cover; background:var(--paper-dim); transition: transform 0.5s ease; }
+  .card-img{ aspect-ratio:4/3; width:100%; object-fit:cover; background:var(--bg-panel); transition: transform 0.5s ease; }
   .card:hover .card-img { transform: scale(1.05); }
 
   /* RIBBON "ESPECIALIDAD" */
@@ -342,7 +320,7 @@
     position: absolute;
     top: 14px;
     left: -6px;
-    background: var(--gold-bright);
+    background: var(--pink-main);
     color: #fff;
     padding: 6px 12px;
     font-family: 'Space Mono', monospace;
@@ -351,7 +329,7 @@
     text-transform: uppercase;
     letter-spacing: 0.05em;
     border-radius: 0 4px 4px 0;
-    box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+    box-shadow: 0 4px 10px rgba(0,0,0,0.4);
     z-index: 10;
   }
   .ribbon::before {
@@ -359,7 +337,7 @@
     position: absolute;
     bottom: -6px;
     left: 0;
-    border-top: 6px solid #b8862d;
+    border-top: 6px solid #b80052;
     border-left: 6px solid transparent;
   }
 
@@ -374,8 +352,8 @@
     top:12px; right:12px;
     width:42px; height:42px; 
     border-radius:50%;
-    border:none;
-    background:rgba(8,31,44,0.45);
+    border:1px solid rgba(255,255,255,0.15);
+    background:rgba(5, 5, 5, 0.6);
     backdrop-filter:blur(6px);
     -webkit-backdrop-filter:blur(6px);
     display:flex;
@@ -388,21 +366,24 @@
     z-index: 10;
   }
   .fav-btn svg{ width:22px; height:22px; }
-  .fav-btn path{ fill:none; stroke:#f3ecdc; stroke-width:1.8; transition:fill .25s, stroke .25s; stroke-linejoin:round; stroke-linecap:round; }
-  .fav-btn.active{ background:rgba(193,85,58,0.95); }
-  .fav-btn.active path{ fill:#f3ecdc; stroke:#f3ecdc; }
+  .fav-btn path{ fill:none; stroke:var(--ink); stroke-width:1.8; transition:fill .25s, stroke .25s; stroke-linejoin:round; stroke-linecap:round; }
+  .fav-btn.active{ background:var(--pink-main); border-color: var(--pink-main); }
+  .fav-btn.active path{ fill:#fff; stroke:#fff; }
   .fav-btn.pop-anim svg { animation: heartPop 0.35s cubic-bezier(0.34, 1.56, 0.64, 1) forwards; }
 
-  /* QUANTITY CONTROLS PENTRU FAVORITE */
+  /* QUANTITY CONTROLS */
   .qty-controls {
     position: absolute;
     bottom: 10px;
     right: 10px;
     display: flex;
     align-items: center;
-    background: rgba(255, 255, 255, 0.95);
+    background: rgba(18, 18, 18, 0.95);
+    border: 1px solid var(--paper-dim);
+    backdrop-filter: blur(4px);
+    -webkit-backdrop-filter: blur(4px);
     border-radius: 100px;
-    box-shadow: 0 2px 8px rgba(0,0,0,0.15);
+    box-shadow: 0 4px 12px rgba(0,0,0,0.4);
     overflow: hidden;
     z-index: 10;
   }
@@ -411,29 +392,29 @@
     height: 32px;
     border: none;
     background: transparent;
-    color: var(--navy);
+    color: var(--ink);
     font-size: 1.2rem;
     font-weight: 700;
     cursor: pointer;
     display: flex;
     align-items: center;
     justify-content: center;
-    transition: background 0.2s;
+    transition: background 0.2s, color 0.2s;
   }
-  .qty-btn:active { background: rgba(0,0,0,0.05); }
+  .qty-btn:active { background: var(--pink-main); color: #fff;}
   .qty-val {
     width: 24px;
     text-align: center;
     font-family: 'Space Mono', monospace;
     font-weight: 700;
     font-size: 0.9rem;
-    color: var(--navy-deep);
+    color: var(--pink-bright);
   }
 
   .card-body{ padding:18px; display:flex; flex-direction:column; gap:10px; flex:1; }
   .card-top{ display:flex; justify-content:space-between; align-items:baseline; gap:10px; }
   .card-top h3{ font-size:1.18rem; line-height:1.2; margin:0;}
-  .price{ font-family:'Space Mono', monospace; font-weight:700; color:var(--gold); white-space:nowrap; font-size:1.05rem; }
+  .price{ font-family:'Space Mono', monospace; font-weight:700; color:var(--pink-bright); white-space:nowrap; font-size:1.05rem; }
   .desc{ font-size:14px; color:var(--ink-soft); margin:0; line-height: 1.45;}
   .ingredients{ font-size:13px; color:var(--ink-soft); margin:0; }
   .ingredients b{ color:var(--ink); font-weight:600; }
@@ -443,12 +424,9 @@
   .allergens{ display:flex; flex-wrap:wrap; gap:6px; }
   .allergen-pill{
     font-family:'Space Mono', monospace; font-size:11px; letter-spacing:.02em; 
-    padding:4px 10px; border-radius:100px; background:rgba(193,85,58,0.12); color:var(--coral); font-weight: 600;
+    padding:4px 10px; border-radius:100px; background:rgba(255, 42, 133, 0.15); color:var(--pink-bright); font-weight: 600;
   }
-  .no-allergens{ font-family:'Space Mono', monospace; font-size:11px; color:var(--foam-dim); font-weight:600; }
-  
-  .tag-row{ display:flex; flex-wrap:wrap; gap:6px; margin-top:2px; }
-  .tag-pill{ font-size:11px; font-family:'Space Mono', monospace; color:var(--navy-panel); background:rgba(18,50,73,0.06); padding:4px 10px; border-radius:100px; font-weight: 600;}
+  .no-allergens{ font-family:'Space Mono', monospace; font-size:11px; color:var(--ink-soft); font-weight:600; }
 
   .empty-state{ text-align:center; padding:60px 20px; color:var(--ink-soft); font-family:'Space Mono', monospace; font-size:14px; }
 
@@ -458,9 +436,9 @@
     bottom: 0;
     left: 0;
     width: 100%;
-    background: rgba(255, 255, 255, 0.95);
-    backdrop-filter: blur(12px);
-    -webkit-backdrop-filter: blur(12px);
+    background: rgba(18, 18, 18, 0.95);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
     border-top: 1px solid var(--paper-dim);
     padding: 16px 20px calc(16px + env(safe-area-inset-bottom));
     display: flex;
@@ -469,7 +447,7 @@
     z-index: 100;
     transform: translateY(120%);
     transition: transform 0.4s cubic-bezier(0.2, 0.8, 0.2, 1);
-    box-shadow: 0 -4px 20px rgba(11,43,60,0.08);
+    box-shadow: 0 -10px 30px rgba(0,0,0,0.6);
   }
   .total-bar.show { transform: translateY(0); }
   
@@ -481,12 +459,9 @@
     padding-bottom: 8px;
   }
   .total-label { font-size: 13px; color: var(--ink-soft); font-weight: 600; text-transform: uppercase; letter-spacing: 0.05em;}
-  .total-amount { font-family: 'Space Mono', monospace; font-size: 1.4rem; font-weight: 700; color: var(--navy-deep); }
+  .total-amount { font-family: 'Space Mono', monospace; font-size: 1.4rem; font-weight: 700; color: var(--pink-bright); }
   
-  .action-buttons {
-    display: flex;
-    gap: 12px;
-  }
+  .action-buttons { display: flex; gap: 12px; }
   
   .btn-action {
     flex: 1;
@@ -509,14 +484,13 @@
   .btn-whatsapp {
     background: #25D366;
     color: white;
-    box-shadow: 0 4px 12px rgba(37, 211, 102, 0.25);
   }
   .btn-whatsapp svg { width: 18px; height: 18px; fill: currentColor; }
   
   .btn-waiter {
-    background: var(--navy);
-    color: white;
-    box-shadow: 0 4px 12px rgba(11,43,60,0.2);
+    background: var(--bg-panel);
+    color: var(--ink);
+    border: 1px solid var(--paper-dim);
   }
   .btn-waiter svg { width: 18px; height: 18px; stroke: currentColor; stroke-width: 2; fill: none; stroke-linecap: round; stroke-linejoin: round;}
 
@@ -527,15 +501,15 @@
     right: 20px;
     width: 48px;
     height: 48px;
-    background: var(--navy);
-    color: var(--paper);
+    background: var(--pink-main);
+    color: #fff;
     border: none;
     border-radius: 50%;
     display: flex;
     align-items: center;
     justify-content: center;
     cursor: pointer;
-    box-shadow: 0 6px 16px rgba(11,43,60,0.25);
+    box-shadow: 0 6px 16px rgba(255, 42, 133, 0.4);
     z-index: 90;
     opacity: 0;
     pointer-events: none;
@@ -544,22 +518,22 @@
     -webkit-tap-highlight-color: transparent;
   }
   .scroll-top-btn.show { opacity: 1; pointer-events: auto; transform: translateY(0); }
-  .scroll-top-btn.lift { bottom: 130px; /* Ridicat deasupra barei extinse de total */ }
+  .scroll-top-btn.lift { bottom: 130px; }
   .scroll-top-btn svg { width: 24px; height: 24px; stroke: currentColor; stroke-width: 2.5; fill: none; stroke-linecap: round; stroke-linejoin: round;}
-  .scroll-top-btn:active { background: var(--navy-deep); transform: scale(0.92); }
+  .scroll-top-btn:active { background: var(--pink-bright); transform: scale(0.92); }
 
   /* ---------- FOOTER ---------- */
-  footer{ background:var(--navy-deep); color:#a9c0ba; padding:40px 0 26px; font-size:13.5px; }
+  footer{ background:var(--bg-card); border-top: 1px solid var(--paper-dim); color:var(--ink-soft); padding:40px 0 26px; font-size:13.5px; }
   .footer-inner{ display:flex; justify-content:space-between; flex-wrap:wrap; gap:16px; align-items:center; }
-  footer .brand{ font-family:'Fraunces', serif; color:var(--paper); font-size:1.1rem; }
+  footer .brand{ font-family:'Fraunces', serif; color:var(--ink); font-size:1.1rem; }
   .footer-links{ display:flex; gap:20px; flex-wrap:wrap; align-items:center; }
-  .footer-links button{ background:none; border:none; color:#a9c0ba; font-family:'Work Sans', sans-serif; font-size:13.5px; cursor:pointer; text-decoration:underline; text-underline-offset:3px; padding:0; }
+  .footer-links button{ background:none; border:none; color:var(--ink-soft); font-family:'Work Sans', sans-serif; font-size:13.5px; cursor:pointer; text-decoration:underline; text-underline-offset:3px; padding:0; }
 
   /* ---------- MODALS ---------- */
-  .modal-overlay{ position:fixed; inset:0; background:rgba(8,31,44,0.6); display:none; align-items:center; justify-content:center; padding:20px; z-index:150; backdrop-filter: blur(4px); -webkit-backdrop-filter: blur(4px);}
+  .modal-overlay{ position:fixed; inset:0; background:rgba(0,0,0,0.85); display:none; align-items:center; justify-content:center; padding:20px; z-index:150; backdrop-filter: blur(6px); -webkit-backdrop-filter: blur(6px);}
   .modal-overlay.open{ display:flex; }
-  .modal{ background:var(--paper); max-width:400px; width:100%; max-height:90vh; overflow-y:auto; border-radius:var(--radius-lg); padding:30px; position:relative; box-shadow: 0 10px 40px rgba(0,0,0,0.2);}
-  .modal h2{ font-size:1.4rem; margin-bottom:14px; }
+  .modal{ background:var(--bg-card); border: 1px solid var(--paper-dim); max-width:400px; width:100%; max-height:90vh; overflow-y:auto; border-radius:var(--radius-lg); padding:30px; position:relative; box-shadow: 0 20px 40px rgba(0,0,0,0.6);}
+  .modal h2{ font-size:1.4rem; margin-bottom:14px; color: var(--ink); }
   .modal p{ font-size:14px; color:var(--ink-soft); margin:0 0 16px; }
   .modal-close{ position:absolute; top:14px; right:14px; background:none; border:none; font-size:20px; cursor:pointer; color:var(--ink-soft); line-height:1; padding:8px; }
   
@@ -568,14 +542,15 @@
     padding: 14px;
     font-size: 1.2rem;
     text-align: center;
-    border: 2px solid var(--paper-dim);
+    background: var(--bg-base);
+    color: var(--ink);
+    border: 1px solid var(--paper-dim);
     border-radius: var(--radius-md);
     margin-bottom: 20px;
     font-family: 'Space Mono', monospace;
     font-weight: 700;
-    color: var(--navy);
   }
-  .input-table:focus { outline: none; border-color: var(--foam-dim); }
+  .input-table:focus { outline: none; border-color: var(--pink-main); }
   
   .btn-submit {
     width: 100%;
@@ -594,7 +569,8 @@
   .waiter-mode {
     position: fixed;
     inset: 0;
-    background: #fff;
+    background: var(--bg-base);
+    color: var(--ink);
     z-index: 200;
     display: none;
     flex-direction: column;
@@ -605,10 +581,10 @@
   .waiter-header {
     text-align: center;
     margin-bottom: 30px;
-    border-bottom: 3px solid var(--navy);
+    border-bottom: 2px solid var(--paper-dim);
     padding-bottom: 20px;
   }
-  .waiter-header h2 { font-size: 2rem; color: var(--navy); }
+  .waiter-header h2 { font-size: 2rem; color: var(--pink-main); }
   .waiter-list { list-style: none; padding: 0; margin: 0 0 30px; }
   .waiter-list li {
     display: flex;
@@ -616,32 +592,32 @@
     font-size: 1.4rem;
     font-weight: 600;
     padding: 16px 0;
-    border-bottom: 1px solid #eee;
+    border-bottom: 1px solid var(--paper-dim);
     color: var(--ink);
   }
   .waiter-list .qty-badge {
-    background: var(--gold);
+    background: var(--pink-main);
     color: white;
     padding: 4px 10px;
     border-radius: 8px;
     margin-right: 12px;
   }
-  .waiter-total { font-size: 1.8rem; font-weight: 700; text-align: right; color: var(--navy-deep); }
+  .waiter-total { font-size: 1.8rem; font-weight: 700; text-align: right; color: var(--pink-bright); }
   
   .waiter-actions {
     position: fixed;
     bottom: 0;
     left: 0;
     width: 100%;
-    background: #fff;
+    background: var(--bg-card);
+    border-top: 1px solid var(--paper-dim);
     padding: 20px;
-    box-shadow: 0 -4px 20px rgba(0,0,0,0.1);
     display: flex;
     gap: 16px;
   }
   .btn-waiter-done {
     flex: 1;
-    background: var(--navy);
+    background: var(--pink-main);
     color: white;
     border: none;
     padding: 16px;
@@ -652,8 +628,8 @@
   }
   .btn-waiter-back {
     background: transparent;
-    color: var(--ink-soft);
-    border: 2px solid var(--paper-dim);
+    color: var(--ink);
+    border: 1px solid var(--paper-dim);
     padding: 16px;
     border-radius: var(--radius-md);
     font-weight: 600;
@@ -695,35 +671,28 @@
   </div>
   <div class="wrap hero-inner">
     <div class="hero-text">
-      <p class="eyebrow" id="txtEyebrow">Gijón &middot; Menú digital</p>
-      <h1 id="txtTitle">La Marea<br><em id="txtTitleEm">menú digital</em></h1>
-      <p class="tag" id="txtTagline">Cocina asturiana a pie de puerto: fabada, mariscos frescos y lo que trae el mar cada mañana.</p>
+      <p class="eyebrow" id="txtEyebrow">Menú digital</p>
+      <h1 id="txtTitle">Fiera Bar</h1>
+      <p class="tag" id="txtTagline">Cócteles exclusivos, ambiente vibrante y los mejores momentos de la noche.</p>
       <div class="hero-meta">
-        <div><span id="txtHoursLabel">Horario</span><span id="txtHoursValue">13:00 &ndash; 23:30</span></div>
+        <div><span id="txtHoursLabel">Horario</span><span id="txtHoursValue">18:00 &ndash; 02:00</span></div>
       </div>
     </div>
-    <div class="sea-wrap" aria-hidden="true">
-      <svg class="sea-svg" viewBox="0 0 300 220" fill="none">
-        <path class="gull g1" d="M60 40 q6 -8 12 0 q6 -8 12 0" stroke="#8fd1c2" stroke-width="2" stroke-linecap="round"/>
-        <path class="gull g2" d="M210 60 q5 -7 10 0 q5 -7 10 0" stroke="#8fd1c2" stroke-width="2" stroke-linecap="round"/>
-        <g class="boat">
-          <path d="M136 96 L164 96 L160 104 L140 104 Z" fill="#e0ac48"/>
-          <rect x="149" y="70" width="2" height="28" fill="#f3ecdc"/>
-          <path d="M151 72 L151 92 L166 92 Z" fill="#8fd1c2" opacity="0.85"/>
-        </g>
-        <g class="wave-group back">
-          <path d="M0 140 Q37 122 75 140 T150 140 T225 140 T300 140 T375 140 T450 140 V220 H0 Z" fill="#123249"/>
-        </g>
-        <g class="wave-group">
-          <path d="M0 150 Q37 168 75 150 T150 150 T225 150 T300 150 T375 150 T450 150 V220 H0 Z" fill="#0b2b3c"/>
-        </g>
+    
+    <!-- ILUSTRAȚIE FIXĂ: Pahar de cocktail cu lichid roz și pai (Fără animații) -->
+    <div class="cocktail-wrap" aria-hidden="true">
+      <svg class="cocktail-svg" viewBox="0 0 200 200" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <!-- Paiul -->
+        <line x1="120" y1="20" x2="85" y2="105" stroke="#ffffff" stroke-width="5" stroke-linecap="round"/>
+        <!-- Lichidul roz din pahar -->
+        <path d="M 50 75 L 150 75 L 115 138 C 112 143 107 145 100 145 C 93 145 88 143 85 138 Z" fill="#ff2a85" opacity="0.9"/>
+        <!-- Paharul de cocktail (Contur alb curat) -->
+        <path d="M 35 60 L 165 60 L 100 145 Z" stroke="#ffffff" stroke-width="5" stroke-linejoin="round"/>
+        <!-- Piciorul și baza paharului -->
+        <line x1="100" y1="145" x2="100" y2="178" stroke="#ffffff" stroke-width="5" stroke-linecap="round"/>
+        <line x1="70" y1="178" x2="130" y2="178" stroke="#ffffff" stroke-width="5" stroke-linecap="round"/>
       </svg>
     </div>
-  </div>
-  <div class="wave-divider" aria-hidden="true">
-    <svg viewBox="0 0 1200 40" preserveAspectRatio="none">
-      <path d="M0 20 C 150 40, 350 0, 600 20 C 850 40, 1050 0, 1200 20 L1200 40 L0 40 Z" fill="#f3ecdc"/>
-    </svg>
   </div>
 </header>
 
@@ -731,7 +700,7 @@
   <div class="controls">
     <div class="search-box">
       <svg class="search-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M11 4a7 7 0 1 0 0 14 7 7 0 0 0 0-14zm10 17-5.6-5.6"/></svg>
-      <input type="search" id="searchInput" aria-label="Buscar" placeholder="Buscar un plato...">
+      <input type="search" id="searchInput" aria-label="Buscar" placeholder="Buscar un cóctel o plato...">
     </div>
     <div class="tag-filters" id="tagFilters" role="group" aria-label="Filtrar"></div>
   </div>
@@ -763,10 +732,10 @@
 
 <footer>
   <div class="wrap footer-inner">
-    <div class="brand">La Marea</div>
+    <div class="brand">Fiera Bar</div>
     <div class="footer-links">
       <button type="button" id="openLegal"></button>
-      <span id="txtFooterCopy">&copy; 2026 La Marea, Gijón</span>
+      <span id="txtFooterCopy">&copy; 2026 Fiera Bar</span>
     </div>
   </div>
 </footer>
@@ -824,7 +793,8 @@
     { key:'entrante', es:'Entrantes', en:'Starters' },
     { key:'principal', es:'Principales', en:'Mains' },
     { key:'postre', es:'Postres', en:'Desserts' },
-    { key:'bebida', es:'Bebidas', en:'Drinks' }
+    { key:'bebida', es:'Bebidas', en:'Drinks' },
+    { key:'coctel', es:'Cócteles', en:'Cocktails' }
   ];
   const OTHER_LABEL = { es:'Otros', en:'Other' };
 
@@ -836,7 +806,8 @@
     'temporada': { es:'temporada', en:'seasonal' },
     'queso': { es:'queso', en:'cheese' },
     'sidra': { es:'sidra', en:'cider' },
-    'sin gluten': { es:'sin gluten', en:'gluten-free' }
+    'sin gluten': { es:'sin gluten', en:'gluten-free' },
+    'sin alcohol': { es:'sin alcohol', en:'alcohol-free' }
   };
   const ALLERGEN_LABELS = {
     'Gluten': { es:'Gluten', en:'Gluten' },
@@ -850,22 +821,22 @@
 
   const UI = {
     es: {
-      eyebrow: 'Gijón · Menú digital',
-      titleEm: 'menú digital',
-      tagline: 'Cocina asturiana a pie de puerto: fabada, mariscos frescos y lo que trae el mar cada mañana.',
+      eyebrow: 'Menú digital',
+      titleEm: 'Fiera Bar',
+      tagline: 'Cócteles exclusivos, ambiente vibrante y los mejores momentos de la noche.',
       hoursLabel: 'Horario',
-      hoursValue: '13:00 – 23:30',
-      searchPlaceholder: 'Buscar un plato…',
+      hoursValue: '18:00 – 02:00',
+      searchPlaceholder: 'Buscar un cóctel o plato...',
       allChip: 'Todos',
       ingredientsLabel: 'Ingredientes:',
       allergensLabel: 'Alérgenos:',
       noAllergens: 'Sin alérgenos',
-      emptyState: 'Ningún plato coincide con tu búsqueda.',
+      emptyState: 'Ningún producto coincide con tu búsqueda.',
       loadError: 'No se pudo cargar el menú. Comprueba que menu.json esté disponible.',
       legalLinkText: 'Aviso legal y privacidad',
-      footerCopy: '© 2026 La Marea, Gijón',
+      footerCopy: '© 2026 Fiera Bar',
       modalTitle: 'Aviso legal y privacidad',
-      modalP1: 'Los precios, ingredientes y disponibilidad de los platos mostrados en este menú pueden variar.',
+      modalP1: 'Los precios, ingredientes y disponibilidad de los productos mostrados en este menú pueden variar.',
       modalP2: 'Tus favoritos se guardan localmente en tu dispositivo.',
       modalP3: 'La información mostrada tiene carácter orientativo.',
       favShortcutLabel: 'Mi Selección',
@@ -875,7 +846,7 @@
       btnWaiter: 'Mostrar al Camarero',
       ribbonSpecial: 'Especialidad',
       waModalTitle: 'Número de Mesa',
-      waModalDesc: 'Por favor, indica tu número de mesa para enviar el pedido al restaurante.',
+      waModalDesc: 'Por favor, indica tu número de mesa para enviar el pedido a la barra.',
       sendWaBtn: 'Enviar',
       waiterTitle: 'Selección de la Mesa',
       closeWaiterBtn: 'Volver al Menú',
@@ -883,22 +854,22 @@
       whatsappIntro: '¡Hola! Somos la mesa {mesa}. Nos gustaría pedir:'
     },
     en: {
-      eyebrow: 'Gijón · Digital menu',
-      titleEm: 'digital menu',
-      tagline: 'Asturian cooking by the harbour: fabada, fresh seafood and whatever the sea brings in each morning.',
+      eyebrow: 'Digital menu',
+      titleEm: 'Fiera Bar',
+      tagline: 'Signature cocktails, vibrant atmosphere and the best night moments.',
       hoursLabel: 'Hours',
-      hoursValue: '1:00 pm – 11:30 pm',
-      searchPlaceholder: 'Search a dish…',
+      hoursValue: '6:00 pm – 2:00 am',
+      searchPlaceholder: 'Search a cocktail or dish...',
       allChip: 'All',
       ingredientsLabel: 'Ingredients:',
       allergensLabel: 'Allergens:',
       noAllergens: 'No allergens',
-      emptyState: 'No dishes match your search.',
+      emptyState: 'No products match your search.',
       loadError: 'Could not load the menu. Check that menu.json is available.',
       legalLinkText: 'Legal notice & privacy',
-      footerCopy: '© 2026 La Marea, Gijón',
+      footerCopy: '© 2026 Fiera Bar',
       modalTitle: 'Legal notice & privacy',
-      modalP1: 'Prices, ingredients and availability of dishes may change.',
+      modalP1: 'Prices, ingredients and availability of products may change.',
       modalP2: 'Your favorites are saved locally on your device.',
       modalP3: 'The information shown is for guidance only.',
       favShortcutLabel: 'My Selection',
@@ -908,7 +879,7 @@
       btnWaiter: 'Show to Waiter',
       ribbonSpecial: 'Signature',
       waModalTitle: 'Table Number',
-      waModalDesc: 'Please enter your table number to send the order to the restaurant.',
+      waModalDesc: 'Please enter your table number to send the order to the bar.',
       sendWaBtn: 'Send Order',
       waiterTitle: 'Table Selection',
       closeWaiterBtn: 'Back to Menu',
@@ -917,8 +888,8 @@
     }
   };
 
-  const FAVORITES_KEY = 'laMarea:favoritesQty';
-  const LANG_KEY = 'laMarea:lang';
+  const FAVORITES_KEY = 'fieraBar:favoritesQty';
+  const LANG_KEY = 'fieraBar:lang';
 
   let allItems = [];
   let activeFilter = 'all';
@@ -995,7 +966,7 @@
   function fallbackImageUrl(item){
     let seed = 0;
     if(item.name) { for (let i = 0; i < item.name.length; i++) seed += item.name.charCodeAt(i); }
-    return `https://loremflickr.com/480/360/food,dish,meal?lock=${seed}`;
+    return `https://loremflickr.com/480/360/cocktail,drink?lock=${seed}`;
   }
 
   function applyStaticText(){
@@ -1004,7 +975,7 @@
     langToggle.textContent = t.toggleLabel;
     favShortcut.setAttribute('aria-label', t.favShortcutLabel);
     document.getElementById('txtEyebrow').textContent = t.eyebrow;
-    document.getElementById('txtTitleEm').textContent = t.titleEm;
+    document.getElementById('txtTitle').textContent = t.titleEm;
     document.getElementById('txtTagline').textContent = t.tagline;
     document.getElementById('txtHoursLabel').textContent = t.hoursLabel;
     document.getElementById('txtHoursValue').textContent = t.hoursValue;
@@ -1403,4 +1374,3 @@
 
 </body>
 </html>
-
